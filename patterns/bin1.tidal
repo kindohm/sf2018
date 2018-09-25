@@ -1,0 +1,14 @@
+bps (160/120)
+
+let pat = "{0 1 1 1 ~ ~ 0 1 1 0 0 ~ ~}%8"
+
+do
+    let pat = "{0 1 1 0 ~ ~  0 1 0 ~  1 ~}%8"
+    d1 $ stack [
+        (|*| gain 1.1) $ gain (inv <$> pat) # midinote "0"
+        , (|*| gain 1.1) $ gain (pat) # midinote "3"
+        , (0.5 ~>) $ rarely (off (0.0625*3) (|+| note "-12")) $ gain (pat) # midichan 1 # note "-12"
+        , gain (inv <$> pat) # midichan 2 # note "-24"
+        , density (discretise 1 $ choose [0.5,1,0.25,2]) $ gain "1*8" # midinote "8" ] # s "midi"
+
+        hush

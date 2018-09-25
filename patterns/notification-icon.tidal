@@ -1,0 +1,17 @@
+bps (200/120)
+
+-- erebus
+let this_pent = [0, 2, 4, 7, 9, 12, 14,16,19]
+let prog = "[48 45 46 46]/16"
+let runMidi xs len = (xs !!) <$> (run $ fromIntegral $ len)
+
+d1 $ (|+| note "-48") $ (|+| note "-36") $ (|+| note prog) $ density 1 $ every 2 (|+| note "12") $ note "0 2 4 7 9 12 14 [16 19]/2"
+        # s "midi" # midichan 0
+
+
+d2 $ (|+| note "-48") $ (|+| note "-12") $ 
+    (|+| note (choose[0,-12])) $ (|+| note prog) $ slow 2 $  note "[~ 0]*2 ~ ~ 0*4" # s "midi" # midichan 1
+
+d1 silence
+
+hush

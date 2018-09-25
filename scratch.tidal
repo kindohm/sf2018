@@ -1,0 +1,13 @@
+bps (150/120)
+
+do
+    let pat = "{1 0 0  1 ~ ~ 1 1*2 1*2 0*2 0*2 ~ 0 ~ ~ ~ 0*2 0 1*2 1 0 0*2 0}%8"
+    d1 $ 
+        stack [ 
+        gain (inv <$> pat) # s "sfkit1",
+        gain (pat) # s "sfkit1" # n 1,
+        rarely ((# n 3) .(|*| gain 0.9)) $ 
+            gain (pat) # s "sfkit1" # n 2 # cut 221,
+            gain (inv <$> pat) # s "sfstab1" # n "{4}%16"] # pan (scale 0.25 0.75 $ shift' 231 rand)
+
+            hush

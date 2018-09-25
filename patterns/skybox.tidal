@@ -1,0 +1,148 @@
+bps (140/120)
+
+-- rytm 58
+-- stab01
+-- bass01
+
+-- L2L version with samples is below
+
+let chord = "[0,-2,-4,-7]"
+    pat = "{1 1*2 ~ ~ ~ ~ ~ 1*2 1*2 ~ ~ ~ 1 [~ 1] ~ 1 ~ ~ 1 1}%8"
+    tmod p = id $ whenmod 17 14 (iter 8) $ whenmod 10 5 (foldEvery [3,4] (0.25 ~>)) $ p
+    minchord = "[-19,-21]"
+    pat2 = "{1 1*2 ~ ~ 1*2 1*2 1*2 1*2 1*2 ~ ~ ~ ~ ~ 1 1}%8"
+    tmod2 p = id $ iter "<16 8 4>" $ p
+    stabpat = rarely (stut' 1 (0.125*3) (|+| note "12")) $ (|+| note "<-12 0 12>") $
+                tmod $ gain pat # note chord # dur (scale 0.2 0.8 $ rand)
+                |=| x (slow 8 tri1)
+                |=| y (slow 7.33 tri1)
+                |=| z (slow 6.66 tri1)
+    rytmpat = whenmod 12 8 (degrade) $ tmod $    
+              stack [
+                midinote "8([9 11 7 10 6]/5,16)",
+                whenmod 8 4 (0.125 ~>) $ whenmod 7 4 (slow 2) $ struct "x*2" $ cp,
+                (0.0625 <~) $ struct "{x ~ ~ ~ ~}%4" oh,
+                struct pat $ midinote "0"]
+                  # scene1 "0" # velocity "1"
+    basspat = whenmod 14 9 (gtfo') $ degrade $ tmod $ 
+                  (foldEvery [1] (const $ (0.0625 ~>) $ (|+| note "[-12 0 -12 [-14 -2 -14]/2]/8") $
+                  (|+| note "5") $
+                  note "{0 ~ ~ 0 [~ 0/2] ~ ~}%4") $ note "~")
+                  |=| dur "0.5"
+                  |=| x (slow 4.33 tri1)
+                  |=| y (slow 3.66 tri1)
+                  |=| z (slow 5.66 tri1)
+    stabpat2 = tmod2 $ gain pat2 # note minchord # dur "0.3"
+                |=| x "0.2"
+                |=| y "0.2"
+                |=| z "0.2"
+    rytmpat2 = whenmod 12 8 (degrade) $ tmod2 $
+                stack [
+                  degrade $ midinote "8([9 11 7 10 6]/5,16)",
+                  whenmod 8 4 (0.125 ~>) $ whenmod 7 4 (slow 2) $ struct "x*2" $ cp,
+                  struct pat2 $ midinote "0"]
+                    # scene1 "0.01"
+    basspat2 = tmod2 $ (|+| note "-12") $ (0.5 ~>) $ gain pat2 # note "5"
+                |=| dur "0.1"
+                |=| x "0.6"
+                |=| y "0.5"
+                |=| z "0.99"
+
+                -- pause
+do
+  stab1 silence
+  bass1 silence
+  rytm silence
+
+  -- intro
+do
+  stab1 $ stabpat
+  bass1 $ basspat
+
+-- intro rytm
+do
+  stab1 $ iter 8 $ stabpat
+  rytm $ iter 8 $ rytmpat
+  bass1 $ iter 8 $ basspat
+
+-- main
+do
+  stab1 $ stabpat
+  rytm $ rytmpat
+  bass1 $ basspat
+
+-- pause
+do
+  stab1 silence
+  bass1 silence
+  rytm silence
+
+-- middle
+do
+  stab1 $ stabpat2
+  rytm $ rytmpat2
+  bass1 $ basspat2
+
+-- pause
+do
+  stab1 silence
+  bass1 silence
+  rytm silence
+
+-- intro
+do
+  stab1 $ stabpat
+  bass1 $ basspat
+
+-- main
+do
+  stab1 $ stabpat
+  rytm $ rytmpat
+  bass1 $ basspat
+
+-- pause
+do
+  stab1 silence
+  bass1 silence
+  rytm silence
+
+-- middle
+do
+  stab1 $ stabpat2
+  rytm $ rytmpat2
+  bass1 $ basspat2
+
+
+
+  bps (140/120)
+
+  do
+    let pat = "{1 1*2 1 ~ 1 ~ 1*2 ~ ~ 1 1*2 1*2 ~ 1 ~ 1 ~ ~ }%8"
+        tmod p = id $ whenmod 17 14 (iter 8) $ whenmod 10 5 (foldEvery [3,4] (0.25 ~>)) $ p
+    d2 $ move $ every 9 (stut' 1 (0.125*3) (|*| speed "1.5")) $
+        every 7 (|=| accelerate "-1 1") $ every 6 (rip' 0 8 1 0.25 0.125) $
+        every 5 (rip 0.5 0.1) $ every 8 (|=| coarse "{16 12 8 4 5 6}%16") $
+          stack [
+        whenmod 12 8 (degrade) $ stack [s "iowakit:2([9 11 7 10 6]/5,16)",
+        whenmod 8 4 (0.125 ~>) $ whenmod 7 4 (slow 2) $ struct "x*2" $ s "iowakit:1",
+        (0.0625 <~) $ struct "{x ~ ~ ~ ~}%4" $ s "iowakit:2",
+        struct pat $ s "iowakit:0"],
+        rarely (stut' 1 (0.125*3) (|*| speed "2")) $ degradeBy 0.3 $
+          gain pat # s "iowa" # n (irand 69) # cut "2834" # gain "1.3",
+        degradeBy 0.4 $ gain "{1 ~ ~ 1*2 ~ ~ ~}%4" # s "iowab" # n (irand 39) # cut "8111"]
+  
+  m silence
+  hush
+  
+  do
+    let pat = "{1 1*2 ~ ~ 1*2 ~ 1*2 ~ 1*2 ~ ~ ~ ~ ~ ~ [~ 1] ~ ~ 1 1}%8"
+        tmod p = id $ whenmod 11 8 (iter 8) $
+          foldEvery [3,4] (0.25 <~) $ p
+    d2 $ stack [
+      stack [struct pat $ s "iowakit2" # cut "8329",
+      degrade $ s "iowakit2:2([9 11 7 10 6]/5,16)",
+      whenmod 8 4 (0.125 ~>) $ whenmod 7 4 (slow 2) $ struct "x*2" $ s "iowakit2:1"],
+      gain pat # s "iowa2" # cut "2262" # gain "1.1",
+      (0.5 ~>) $ gain pat # s "iowab2" # cut "1771" # gain "1.05"
+      ]
+  
