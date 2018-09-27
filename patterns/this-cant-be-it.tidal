@@ -1,8 +1,8 @@
 bps (160/120)
 
 do
-    d1 $ g $ (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 15 # gain 1.15
-    d2 $ g $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # stack [ 
+    d1 $ (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "harmor" # midichan 13 # gain 1.15 # nudge 0.2
+    d2 $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # stack [ 
         control (scale 0 127 $ slow 35 tri) # ctlNum 1
         , control 127 # ctlNum 2
         , control (scale 0 127 $ slow 33 tri) # ctlNum 3
@@ -11,7 +11,10 @@ do
         , control (scale 40 90 $ slow 34 tri) # ctlNum 6
         , control (scale 80 127 $ slow 32 tri) # ctlNum 7
         , control 0 # ctlNum 8
-            ] # s "midi" # midichan 15 # midicmd "control"
+            ] # s "harmor" # midichan 13 # midicmd "control" # nudge 0.2
+
+d2 $ control "0*8" # ctlNum 7 # s "harmor" # midichan 13 # midicmd "control"
+
 
 -- just hats
 d3 $ stack [ 

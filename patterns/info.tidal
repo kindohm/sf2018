@@ -1,11 +1,9 @@
--- info
 bpm 170
 
 d5 $ sometimes (jux (iter 4)) $ shift $ sometimes (# speed "[0.5 0.25]*3") $
   (# cutoff (scale 100 3000 $ sine1)) $ slow 16 $ striate 128 $ sound "dr" # n 1
     # gain "1"
  
-d6 silence
 d6 $ degradeBy 0.8 $  whenmod 20 18 (iter 8) $ move $ every 7 (# accelerate "-1 1") $ every 5 (rip 0.5 0.1) $ every 6 (rip' 0 1 16 0.5 0.125) $
 stack [
   degradeBy 0.3 $ slowcat [ brakk "jung1*8", brakk "jung5*8", brakk "jung4*8" ],

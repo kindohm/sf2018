@@ -14,7 +14,6 @@ stack [
   progwav $ s basspat |=| n (shift $ irand 12) |=| gain "1" # cut "1112",
   progwav $ rep' 24 $ sound "{leankit/4 ~ ~ ~ ~}%4" |=| cut "2",
   whenmod 7 4 (0.125 ~>) $ sound "leankit:2*4",
-  sound "~ s" |=| gain "1.1",
   foldEvery [2,3] (density 2) $ sometimesBy 0.1 (# s "leankit:4") $ 
     sound "leankit:3*8" |=| gain "1" # cut "816",
   sound "{leankit:5/8 ~ ~ ~ ~}%4" |=| gain "1",

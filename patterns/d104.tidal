@@ -1,0 +1,14 @@
+bps (140/120)
+
+d1 $ sometimes (stut' 2 (0.0625*3) (|+| note 12)) $  shift $ 
+    (|+| note "-3") $ note "{~ 0 -8 ~ ~ ~ ~ 0 ~ ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 6
+
+d2 $ sometimes (stut' 2 (0.0625*3) (|+| note 12)) $ 
+    (|+| note "12") $ (|+| note "-3") $ note "{~ ~ ~ 0 2 -2 0 ~ ~ ~}%16" # s "midi" # midichan 15
+
+d3 $ 
+    stack [ 
+        density 2 $ s "~ shake" # speed "[0.8,1]",
+    stack [ n "0(3,8) [~ 0*4?]" # cut 378, sometimes (off 0.0625 id) $ n "~ 1" ] # s "d104" ] # gain 1.2
+
+hush
