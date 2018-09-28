@@ -3,12 +3,12 @@ bps (200/120)
 -- bass
 d1 $ whenmod 16 8 (|+| note "-5") $ (|+| note (choose[0,12,0])) $ shift' 81 $
     degradeBy 0.4 $ shift' 82 $ (|+| note "0") $ (|+| note "9") $  (|+| note (shift' 99 $ choose mpent)) $ note "-24"
-        # s "midi" # midichan 6 # sustain 1
+        # s "midi" # midichan 0 # sustain 1
 
 -- arps
 d2 $ whenmod 16 8 (|+| note "-5") $ (|+| note (shift' 1011 $ choose [-12,0,12])) $ shift' 66 $ 
     (|+| note "9") $ 
-    (# note (shift' 98 $ choose mpent)) $ gain "{1*4 1*4 ~ ~ ~ ~ ~}%2" # s "midi" # midichan 15 
+    (# note (shift' 98 $ choose mpent)) $ gain "{1*4 1*4 ~ ~ ~ ~ ~}%2" # s "midi" # midichan 1
 
     hush
 

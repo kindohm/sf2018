@@ -90,7 +90,13 @@ let discretise = _discretise
 
 
 
-d1 $ note "0" # s "midi/2" # midichan 6
-
-            
-hush
+-- A: 3
+-- B: 4
+-- C: 8
+-- D: 9
+-- E: 11
+-- F: 64
+-- G: 65
+-- H: 66
+-- I: 67
+-- J: 68

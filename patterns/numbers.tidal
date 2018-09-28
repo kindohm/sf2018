@@ -1,0 +1,26 @@
+
+bps (165/120)
+
+d1 $ slow 2 $ (|+| note 12) $ note "[0 ~]/2 ~ ~ [[-3 ~ ~ -5] ~]/2" 
+    # s "midi" # midichan 15 # sustain "2.5 ~ ~ [0.5 ~ ~ 3.5]"
+
+
+d1 $ stack [
+   (|+| note (shift' 1 $ choose [12,0,-12])) $ note 7, 
+   (|+| note (shift' 2 $ choose [12,0,-12])) $ note 10, 
+   (|+| note (shift' 3 $ choose [12,0,-12])) $ gain 1 # note (choose [12,14])] 
+   # s "midi" # midichan 15 # sustain 0.25
+
+d2 $ 
+    density 1 $ gain "~ 1" # note 7 # s "midi" # midichan 12 # sustain 0.125
+
+d3 $ stack [
+        slow 2 $ midinote "0 ~ ~ [~ 0] ~ 0 ~ ~",
+        midinote "~ [3,1]",
+        density 2 $ midinote "~ 10",
+        degradeBy 0.6 $ density 16 $ midinote 5,
+        ((0.0625*3) ~>) $ midinote "9*2",
+        sometimes (density 2) $ shift $ degradeBy 0.3 $ midinote "8*4"
+    ] # s "midi"
+
+hush

@@ -1,0 +1,14 @@
+d1 $ sometimesBy 0 (stut' 1 (0.0625*3) (|*| begin 0.5)) $ 
+    shift $ 
+    degradeBy 0.01 $ 
+    shift $ 
+        gain "1*2 1 1 1" 
+        # s "run" # n 6 # release 1 # speed (shift' 42 $ choose[0.25,0.5,0.5,1,2])
+        # begin (discretise (1/4) $ scale 0 0.7 $ slow 33 rand)
+        # gain 1.1
+
+d2 $ stack [s "~ cp", degradeBy 0.3 $ shift $ s "k(3,8) ~", 
+    degradeBy 0.5 $ shift' 77 $ s "{peri pson tite wet peri}%16" 
+        # n (shift' 44 $ irand 20) # speed 1.6 # gain 0.9 # cut 2342 ]
+
+hush

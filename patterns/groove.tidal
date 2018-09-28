@@ -1,0 +1,25 @@
+bps (150/120)
+
+do
+    let bpatMod p = every 1 (superimpose (degradeBy 0.4 . ((shift' 400 $ choose [(0.25),(0.125*3),(0.125*4),(0.125*6)]) ~>))) $ p
+    let bpat = bpatMod $ slowcat ["1", "1", "1", "~"]
+    let spat = slowcat ["~", "~", "~", "1"]
+    d1 $ stack [ 
+            density 2 $ gain bpat # midinote 0,
+            ((0.125*3) ~>) $ density 2 $ gain spat # midinote 1, 
+            ((0.0625*3) ~>) $ density (discretise (1/4) $ shift' 388 $ choose [1,2,4]) $ gain 1 # midinote 5, 
+            density 2 $ gain spat # midinote 3 ] # s "midi"
+    d2 $  density 2 $ (|+| note "-3") $ gain bpat # note "-12" # s "midi" # midichan 15
+
+    hush
+
+do
+    let pat  = "{1       ~ ~ 1 ~ 1 ~ ~}%16"
+        vpat = "{[0 1]/2 ~ ~ 1 ~ 1 ~ ~ }%16"
+        cpp  = "{1       ~ ~ ~ ~ ~ ~ ~}%16"
+    d1 $ s "~ ~ ~ rebcp" # lpf 2000
+    d3 $ s "[rebbd ~ ~ rebbd] ~" # lpf 200 # cut 2343
+    d2 $ (|+| note "12") $ 
+        gain pat # note "[0,2,4,11]" # midichan 15 # s "midi"
+
+        hush

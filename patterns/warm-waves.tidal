@@ -2,11 +2,10 @@ bps (200/120)
 
 -- volca
 d1 $ (|+| note "-24") $ 
-    sometimes (stut' (shift' 20 $ choose [1,2,3]) (0.125*3) (|+| note 12)) $
-    (|+| note "-4") $ slow 4 $ note "[0 ~ ~ [~ 11/2 ~ ~]]" # s "midi" # midichan 15
+    (|+| note "-4") $ slow 4 $ note "[0 ~ ~ [~ 11/2 ~ ~]]" # s "midi" # midichan 0 # sustain 0.3
 
-d4 $ sometimes (stut' (shift' 410 $ choose [1,2,3]) (0.125) (|+| note 12)) $ shift' 8 $
-    (0.5 ~>) $ (|+| note 12) $ (|+| note "-4") $ note "0(3,8)" # s "midi" # midichan 6    
+d4 $ sometimes (stut' (shift' 410 $ choose [1,2]) (0.125) (|+| note 12)) $ shift' 8 $
+    (0.5 ~>) $ (|+| note 12) $ (|+| note "-4") $ note "0(3,8)" # s "midi" # midichan 1
 
 d3 $ every 2 rev $ 
     foldEvery [2,3,4] (density 2)  $ s "ch*16" # n 8 # lpf (scale 100 3000 $ slow 4.1 sine)
