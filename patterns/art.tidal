@@ -1,0 +1,17 @@
+bps (140/120)
+
+do
+    d1 $ sometimes (stut' (shift' 44 $ choose [1,2]) (shift' 414 $ choose [0.0625, 0.0625*2,0.0625*3]) (|+| note (shift' 331 $ choose [12,5,7]))) $ 
+        density 2 $ note "[0,4,9,11]" 
+        # s "midi" 
+        # midichan 15 
+        # sustain 0.1        
+    d2 $ density 2 $ 
+        control "[0 127]/8"
+        # ctlNum 3
+        # s "midi" 
+        # midichan 15 
+        # midicmd "control"
+
+
+    hush

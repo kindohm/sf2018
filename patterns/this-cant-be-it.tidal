@@ -24,35 +24,21 @@ d4 $ stack [
 
 d4 silence
 
-do
-    d1 $ (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "harmor" # midichan 0 # gain 1.15 # nudge 0.2
-    d2 $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # stack [ 
-        control (scale 0 127 $ slow 35 tri) # ctlNum 1
-        , control 127 # ctlNum 2
-        , control (scale 0 127 $ slow 33 tri) # ctlNum 3
-        , control (scale 70 127 $ slow 30 tri) # ctlNum 4
-        , control (scale 0 127 $ slow 31 tri) # ctlNum 5
-        , control (scale 40 90 $ slow 34 tri) # ctlNum 6
-        , control (scale 80 127 $ slow 32 tri) # ctlNum 7
-        , control 0 # ctlNum 8
-            ] # s "harmor" # midichan 13 # midicmd "control" # nudge 0.2
-
-d2 $ control "0*8" # ctlNum 7 # s "harmor" # midichan 13 # midicmd "control"
 
 
 -- just hats
-d3 $ stack [ n "2*16" ] # s "tcbi"     
+d3 $ stack [ s "cantch*16" ]      
 
 
 -- just hats n claps
-d3 $ stack [ n "2*16", (0.125 <~) $ n "1" # nudge (scale 0 0.01 $ shift' 88 rand) ] # s "tcbi"     
+d3 $ stack [ s "cantch*16", (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ]     
 
 
 -- main start
 d3 $ stack [ 
-    whenmod 8 4 (# n 4) $ density 2 $ ((0.125*3) <~) $ n "0(3,8)" # cut 8
-    , every 4 (within ((0.375 + 0.0625), 0.5) (# n 3)) $ n "2*16" # cut 1001
-    , (0.125 <~) $ n "1" # nudge (scale 0 0.01 $ shift' 88 rand) ] # s "tcbi"     
+    whenmod 8 4 (# n 4) $ density 2 $ ((0.125*3) <~) $ s "cantk(3,8)" # cut 8
+    , every 4 (within ((0.375 + 0.0625), 0.5) (# s "cantoh")) $ s "cantch*16" # cut 1001
+    , (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ] 
 
 
 

@@ -28,9 +28,10 @@ do
         # midichan 15 
         # nudge nudgs 
         # sustain "[0.2 0.3]/2"
+
     d3 $ shift' 4 $ stack [ 
-            gain gains # control (scale 64 80 $ slow 8 sine) # ctlNum env
-            , gain gains # control (scale 64 90 $ slow 9 sine) # ctlNum res
+            gain gains # control (scale 64 65 $ slow 8 sine) # ctlNum env
+            , gain gains # control (scale 64 65 $ slow 9 sine) # ctlNum res
             , gain gains # control (scale 44 80 $ slow 10 sine) # ctlNum dec
             , gain gains # control (scale 54 100 $ slow 11 sine) # ctlNum rell
             , gain gains # control (scale 50 80 $ slow 12 sine) # ctlNum fx

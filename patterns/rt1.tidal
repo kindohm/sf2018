@@ -1,0 +1,37 @@
+bps (150/120)
+
+do
+    let 
+        one = "[7,11]"
+        two = "[5,8]"
+        three = "[4,7]"
+        four = "[0,4]"
+        five = "[2,5]"
+        dup f p = off ((0.0625/2)*3) f $ p        
+        gains2 = (slow 1 $ slowcat ["1(<3 7 5 6>,8)", "1(3,8)"])
+    d1 $ sometimes (stut' 1 (0.0625) (|+| note 12)) $ shift $ (|+| note "-12") $ slow 2 $ 
+        stack [
+            dup id $ note one,
+            dup id $ ((0.0625*3) ~>) $ note two,
+            (0.375 ~>) $ note three,
+            g $ dup (# note five) $ ((0.125*5) ~>) $ note four,
+            g $ dup (id) $ ((0.0625*13) ~>) $ note five
+        ]
+            # s "midi" # midichan 15 # sustain 0.1 # gain 1.1
+    d2 $  density 2 $ (|+| note (discretise 4 $ shift' 10 $ choose [0,12,-24,-36])) $ 
+        sometimes (stut' (shift' 409 $ choose [1,2]) 0.125 id) $ shift $
+        gain gains2 # note "12" # s "midi" # midichan 13 
+    d3 $ (|*| gain 1.1) $ whenmod 8 4 move $ stack [
+        rarely (stut' 1 0.0625 id) $ shift $ 
+            sometimes (stut' 1 (0.0625*3) id) $ shift $
+            sometimes (stut' 1 (0.0625*7) id) $
+            shift' 400 $ n "0"
+        , sometimes (stut' 1 (0.125*3) id) $ shift' 401 $ (0.25 ~>) $ n 1
+        , sometimesBy 0.1 (# n 4) $ shift $ degradeBy 0.7 $ density 16 $ n 3 # cut 701
+        , (0.0625 <~) $ n "2/2"
+        , (0.5 <~) $ n 5 ] # s "rt1"
+
+
+        hush
+
+

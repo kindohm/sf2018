@@ -30,8 +30,10 @@ MIDIClient.list; // to check, which are there, you can query them
 )
 
 ~midiOut = MIDIOut.newByName("Focusrite USB MIDI", "Focusrite USB MIDI");
-~loopBeMidiOut = MIDIOut.newByName("LoopBe Internal MIDI", "LoopBe Internal MIDI");
 ~midiOut.latency = 0;
-~loopBeMidiOut.latency = 0;
 ~dirt.soundLibrary.addMIDI(\midi, ~midiOut);
+
+
+~loopBeMidiOut = MIDIOut.newByName("LoopBe Internal MIDI", "LoopBe Internal MIDI");
+~loopBeMidiOut.latency = 0;
 ~dirt.soundLibrary.addMIDI(\harmor, ~loopBeMidiOut);
