@@ -2,7 +2,7 @@ bps (160/120)
 
 -- a4 version
 d1 $ sometimesBy 0 (stut' (shift' 20 $ choose [1,2]) (0.125*3) (|+| note (shift' 44 $ choose [5,7,12,14]))) $ (|+| note 0) $ 
-    (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 0 # nudge 0.2
+    (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 15 # nudge 0.2
 
 let lpf = 3
     env = 4

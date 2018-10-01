@@ -1,0 +1,27 @@
+bps (200/120)
+
+-- erebus
+let this_pent = [0, 2, 4, 7, 9, 12, 14,16,19]
+let prog = "[48 45 46 46]/16"
+let runMidi xs len = (xs !!) <$> (run $ fromIntegral $ len)
+
+d1 $ (|+| note "-12") $ (|+| note prog) $ density 1 $ every 2 (|+| note "12") $ note "0 2 4 7 9 12 14 [16 19]/2"
+        # s "midi" # midichan 15
+
+
+d2 $ (|+| note "0") $ 
+    (|+| note (shift' 44 $ choose[0,-12])) $ (|+| note prog) $ slow 2 $  note "[~ 0]*2 ~ ~ 0*4" # s "midi" # midichan 14
+
+d1 silence
+
+hush
+
+
+d4 $ move $ every 5 (rip 0.5 0.1) $ every 6 (rip' 0 1 12 0.25 0.25) $ stack [
+    degradeBy 0.4 $ shift $ slow 2 $ s "k*4 ~ ~ k*4" # n (run 30),
+    slow 2 $ s "~ sdeep ~ [~ teks?]" # rel 0.8,
+    sometimes (# s "oh") $ shift $ degradeBy 0.4 $ shift $ s "ch*8" # cut 38111,
+    (0.5 ~>) $ s "cpr/4",
+    sometimes (density 2) $ 
+        degradeBy 0.5 $ s "{peri doru tite pson peri}%8" # speed (scale 1 2 $ slow 3 rand) 
+            # n (irand 30) # lpf 3000 # cut 3881]

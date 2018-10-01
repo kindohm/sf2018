@@ -14,11 +14,11 @@ do
     let mod p = id $ p
     d1 $ (|*| gain 1.1) $ shift' 4 $ 
         stack [ 
-            gain gains # n "[0 1]/2"
-            , degradeBy 0.5 $ shift $ sometimesBy 0.08 (# n 3) $ n "2*4" # cut 809
-            , degradeBy 0.7 $ shift' 33 $  (0.375 ~>) $ n 4 # cut 901
-            , ((0.125*5) ~>) $ slow 9 $ n 5] # s "church" 
-    d2 $ (|*| gain 1.15) $ 
+            gain gains # s "[churchk churchcp]/2"
+            , degradeBy 0.5 $ shift $ sometimesBy 0.08 (|+| n 1) $ s "churchch*4" # cut 809
+            , degradeBy 0.7 $ shift' 33 $  (0.375 ~>) $ s "churchb" # cut 901
+            , ((0.125*5) ~>) $ slow 9 $ s "churchcb"] 
+    d2 $ g $ (|*| gain 1.15) $ 
         sometimesBy 0 (stut' (shift' 11 $ choose [1,2,3]) (0.125) (|+| note (shift' 301 $ choose [5,7,12,14]))) $ 
         shift' 4 $
         (|+| note "0") $

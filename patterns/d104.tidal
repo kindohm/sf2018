@@ -1,14 +1,15 @@
 bps (140/120)
 
 d1 $ 
-    (|+| note "-3") $ note "{~ 0 -8 ~ ~ ~ ~ 0 ~ ~ [14 16 16]/3 ~ ~ ~ ~}%16" # s "midi" # midichan 15
+    (|+| note "-3") $ note "{~ 0 -8 ~ ~ ~ ~ 0 ~ ~ [14 16 16]/3 ~ ~ ~ ~}%16" # s "midi" # midichan 15 # gain 1.15
 
 d2 $ 
-    (|+| note "12") $ (|+| note "-3") $ note "{~  ~ [0 2 -2 0] ~}%4" # s "midi" # midichan 14
+    (|+| note "12") $ (|+| note "-3") $ note "{~  ~ [0 2 -2 0] ~}%4" # s "midi" # midichan 14 # gain 1.15
 
 d3 $ 
     stack [ 
         density 2 $ s "~ shake" # speed "[0.8,1]",
-    stack [ n "0(3,8) [~ 0*4?]" # cut 378, sometimes (off 0.0625 id) $ n "~ 1" ] # s "d104" ] # gain 1.2
+    stack [ n "0(3,8) [~ 0*4?]" # s "d104k" # cut 378, 
+    sometimes (off 0.0625 id) $ s "~ d104cp" ]  ] # gain 1.1
 
 hush

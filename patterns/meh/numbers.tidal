@@ -5,11 +5,13 @@ d1 $ slow 2 $ (|+| note 12) $ note "[0 ~]/2 ~ ~ [[-3 ~ ~ -5] ~]/2"
     # s "midi" # midichan 15 # sustain "2.5 ~ ~ [0.5 ~ ~ 3.5]"
 
 
-d1 $ stack [
-   (|+| note (shift' 1 $ choose [12,0,-12])) $ note 7, 
-   (|+| note (shift' 2 $ choose [12,0,-12])) $ note 10, 
-   (|+| note (shift' 3 $ choose [12,0,-12])) $ gain 1 # note (choose [12,14])] 
-   # s "midi" # midichan 15 # sustain 0.25
+d1 $  (|+| note 12) $ slow 4 $ stack [
+   note 7, 
+   note 10, 
+   gain 1 # note (choose [14])] 
+   # s "midi" # midichan 15 # sustain 3
+
+hush
 
 d2 $ 
     density 1 $ gain "~ 1" # note 7 # s "midi" # midichan 12 # sustain 0.125
