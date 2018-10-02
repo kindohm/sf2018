@@ -1,0 +1,15 @@
+bps (170/120)
+
+do
+    let pat = "{1*2  0*2 0 1 [1 1] 0 [1  1]  1  0  1 1 1 1 1 0*2 0 1 ~ ~}%8"
+    d1 $ stack [
+        gain (pat) # s "sfkit2",
+        gain (inv <$> pat)  # s "sfkit2" # n 1 # rel 0.2,
+        sometimes (stut' (shift' 4410 $ choose [1,2]) (0.0625*3) (|*| speed 1.5)) $ 
+            whenmod 8 6 (|+| n 1) $ gain (pat) # s "sfstab2" # n 2 # cut 491,
+        sometimesBy 0.01 (stut' 1 (0.0625) ((|+| n 1) . (|*| gain 0.9))) $ 
+            degradeBy 0.4 $ gain "1*16" # s "sfkit2" # n 2 # cut 444 ]
+
+hush
+
+d1 $ s "sfkit2" # n 3
