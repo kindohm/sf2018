@@ -1,12 +1,34 @@
 bps (140/120)
 
+let 
+    cut1 = 3
+    env1 = 4 
+    dec1 = 8
+    rel1 = 9
+    dfb = 11
+    cut2 = 64
+    env2 = 65
+    dec2 = 66
+    rel2 = 67
+
 d1 $ (|+| note "-12") $ (|+| note "-4") $     
-    stack [note "{0 0/3 1?}%8" ] # s "midi" # midichan 0
+    stack [note "{0 0/3 1?}%8" ] # s "midi" # midichan 15
 
 d2 $ 
-    (0.25 <~) $ density 2 $ 
-    every 2 (id) $ note "[1,16]" # s "midi" # midichan 1
+    (0.25 <~) $ density 2 $ (|+| note "-12") $
+    every 2 (id) $ note "[1,16]" # s "midi" # midichan 14
 
+d4 $ stack [ 
+    gain "1*8" # control (scale 34 44 $ slow 8 sine) # ctlNum cut1
+    , gain "1*8" # control (scale 64 84 $ slow 6.331 sine) # ctlNum env1
+    , gain "1*8" # control (scale 0 64 $ slow 7 sine) # ctlNum dec1
+    , gain "1*8" # control (scale 0 64 $ slow 9 sine) # ctlNum rel1
+    , gain "1*8" # control (scale 44 84 $ slow 7.8329 sine) # ctlNum dfb
+    , gain "1*8" # control (scale 64 74 $ slow 8.8329 sine) # ctlNum cut2
+    , gain "1*8" # control (scale 64 84 $ slow 6.8329 sine) # ctlNum env2
+    , gain "1*8" # control (scale 14 64 $ slow 10.8329 sine) # ctlNum dec2
+    , gain "1*8" # control (scale 14 64 $ slow 11.8329 sine) # ctlNum rel1
+    ] # s "midi" # midichan 15 # midicmd "control"
 
 d3 $ move $ whenmod 8 6 (jux rev) $ 
     every 8 (# accelerate "{1 -1 0.5 -0.5}%7") $

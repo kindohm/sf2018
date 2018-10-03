@@ -1,3 +1,4 @@
+-- all bi-polar cept for dfb/rvb
 let env = 3
     res = 4
     dec = 8
@@ -18,7 +19,7 @@ do
             , degradeBy 0.5 $ shift $ sometimesBy 0.08 (|+| n 1) $ s "churchch*4" # cut 809
             , degradeBy 0.7 $ shift' 33 $  (0.375 ~>) $ s "churchb" # cut 901
             , ((0.125*5) ~>) $ slow 9 $ s "churchcb"] 
-    d2 $ g $ (|*| gain 1.15) $ 
+    d2 $ (|*| gain 1.15) $ 
         sometimesBy 0 (stut' (shift' 11 $ choose [1,2,3]) (0.125) (|+| note (shift' 301 $ choose [5,7,12,14]))) $ 
         shift' 4 $
         (|+| note "0") $
@@ -28,14 +29,13 @@ do
         # midichan 15 
         # nudge nudgs 
         # sustain "[0.2 0.3]/2"
-
     d3 $ shift' 4 $ stack [ 
-            gain gains # control (scale 64 65 $ slow 8 sine) # ctlNum env
-            , gain gains # control (scale 64 65 $ slow 9 sine) # ctlNum res
-            , gain gains # control (scale 44 80 $ slow 10 sine) # ctlNum dec
-            , gain gains # control (scale 54 100 $ slow 11 sine) # ctlNum rell
-            , gain gains # control (scale 50 80 $ slow 12 sine) # ctlNum fx
-            , gain gains # control (scale 0 65 $ slow 13 rand) # ctlNum dfb
+            gain gains # control (scale 64 95 $ slow 8 sine) # ctlNum env
+            , gain gains # control (scale 64 95 $ slow 9 sine) # ctlNum res
+            , gain gains # control (scale 64 70 $ slow 10 sine) # ctlNum dec
+            , gain gains # control (scale 64 70 $ slow 11 sine) # ctlNum rell
+            , gain gains # control (scale 60 90 $ slow 12 sine) # ctlNum fx
+            , gain gains # control (scale 10 55 $ slow 13 rand) # ctlNum dfb
             , gain gains # control (scale 64 100 $ slow 14 sine) # ctlNum rvb
         ] 
         # s "midi" 

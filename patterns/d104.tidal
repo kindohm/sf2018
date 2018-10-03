@@ -1,12 +1,34 @@
 bps (140/120)
 
-d1 $ 
+let 
+    env1 = 3
+    dec1 = 4 
+    len1 = 8
+    dly1 = 9
+    cut2 = 64
+    env2 = 65
+    lfo2 = 66
+
+d1 $ (|+| note "0") $
     (|+| note "-3") $ note "{~ 0 -8 ~ ~ ~ ~ 0 ~ ~ [14 16 16]/3 ~ ~ ~ ~}%16" # s "midi" # midichan 15 # gain 1.15
 
 d2 $ 
     (|+| note "12") $ (|+| note "-3") $ note "{~  ~ [0 2 -2 0] ~}%4" # s "midi" # midichan 14 # gain 1.15
 
-d3 $ 
+
+d3 $ stack [
+        gain "1*16" # control (scale 64 80 $ slow 7 sine) # ctlNum env1
+        , gain "1*16" # control (scale 64 90 $ slow 8 sine) # ctlNum dec1
+        , gain "1*16" # control (scale 64 90 $ slow 9 sine) # ctlNum len1
+        , gain "1*16" # control (scale 64 120 $ slow 9.3988 sine) # ctlNum dly1
+        , gain "1*16" # control (scale 40 70 $ slow 6.3988 sine) # ctlNum cut2
+        , gain "1*16" # control (scale 64 80 $ slow 7.3988 sine) # ctlNum env2
+        , gain "1*16" # control (scale 64 100 $ slow 8.444 sine) # ctlNum lfo2
+    ] # s "midi" # midicmd "control" # midichan 15
+
+
+
+d4 $ 
     stack [ 
         density 2 $ s "~ shake" # speed "[0.8,1]",
     stack [ n "0(3,8) [~ 0*4?]" # s "d104k" # cut 378, 

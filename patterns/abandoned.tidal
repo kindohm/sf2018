@@ -1,12 +1,38 @@
 bps (160/120)
 
+-- ALL BIPOLAR
+let cut1 = 3
+    env1 = 4
+    dec1 = 8
+    rel1 = 9
+    fx1 = 11
+    cut2 = 64
+    env2 = 65
+    dec2 = 66
+    rel2 = 67
+    fx2 = 68
 
-d1 $ rarely (stut' (shift' 5 $ choose [1,2,3]) (shift' 34 $ choose [0.0625,0.0625*3]) (|+| note (shift' 2343 $ choose [-12]))) $ 
-    shift' 100 $ 
-    (|+| note (shift' 44 $ choose [12,24,36])) $
-    note "{~ 0 5 7 14 12 14 ~ ~ }%16" # s "midi" # midichan 1
+gain gain # control (scale min max $ slow speed sine) # ctlNum ctlNum
 
-d2 $ slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 0 # sustain 0.1
+d1 $ stack [
+    slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.1,
+    note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 ]
+
+d2 $ stack [
+    gain "1*8" # control (scale 64 64 $ slow 10 sine) # ctlNum cut1
+    , gain "1*8" # control (scale 64 64 $ slow 12 sine) # ctlNum env1
+    , gain "1*8" # control (scale 64 64 $ slow 13 sine) # ctlNum dec1
+    , gain "1*8" # control (scale 64 64 $ slow 5 sine) # ctlNum rel1
+    , gain "1*8" # control (scale 64 64 $ slow 9 sine) # ctlNum fx1
+    , gain "1*8" # control (scale 64 64 $ slow 9.52 sine) # ctlNum cut2
+    , gain "1*8" # control (scale 64 64 $ slow 6.5232 sine) # ctlNum env2
+    , gain "1*8" # control (scale 64 64 $ slow 8.324 sine) # ctlNum dec2
+    , gain "1*8" # control (scale 64 64 $ slow 7.9918 sine) # ctlNum rel2
+    , gain "1*8" # control (scale 64 64 $ slow 6.7716 sine) # ctlNum fx2
+     ] 
+    # s "midi" # midichan 15 # midicmd "control"    
+
+-- k:5, rss, shake
 
 d3 $ (|*| gain 0.9) $ move $ whenmod 9 7 (jux rev) $
     every 6 (rip' 0 1 12 0.5 0.1) $ 
@@ -20,3 +46,14 @@ d3 $ (|*| gain 0.9) $ move $ whenmod 9 7 (jux rev) $
 
 
 hush
+
+-- A: 3
+-- B: 4
+-- C: 8
+-- D: 9
+-- E: 11
+-- F: 64
+-- G: 65
+-- H: 66
+-- I: 67
+-- J: 68
