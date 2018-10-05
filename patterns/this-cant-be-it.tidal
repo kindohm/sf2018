@@ -2,7 +2,7 @@ bps (160/120)
 
 -- a4 version
 d1 $ sometimesBy 0 (stut' (shift' 20 $ choose [1,2]) (0.125*3) (|+| note (shift' 44 $ choose [5,7,12,14]))) $ (|+| note 0) $ 
-    (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 15 # nudge 0.2
+    (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 15 # nudge 0.2 # gain 1.15
 
 let lpf = 3
     env = 4
@@ -13,14 +13,14 @@ let lpf = 3
     dfb = 68
 
 d4 $ stack [ 
-        gain "1*16" # control (scale 55 80 $ slow 13.1 sine) # ctlNum lpf
-        , gain "1*16" # control (scale 50 80 $ slow 11.31 sine) # ctlNum env
-        , gain "1*16" # control (scale 30 127 $ slow 12.25 sine) # ctlNum len
-        , gain "1*16" # control (scale 50 70 $ slow 10.212 sine) # ctlNum noi
+        gain "1*16" # control (scale 40 40 $ slow 13.1 sine) # ctlNum lpf
+        , gain "1*16" # control (scale 64 64 $ slow 11.31 sine) # ctlNum env
+        , gain "1*16" # control (scale 64 64 $ slow 12.25 sine) # ctlNum len
+        , gain "1*16" # control (scale 60 70 $ slow 10.212 sine) # ctlNum noi
         , gain "1*16" # control (scale 0 40 $ slow 8.41 sine) # ctlNum det
-        , gain "1*16" # control (scale 64 80 $ slow 9.587 sine) # ctlNum sli
-        , gain "1*16" # control (scale 64 100 $ slow 14.6801 sine) # ctlNum dfb
-    ] # s "midi" # midichan 1 # midicmd "control"
+        , gain "1*16" # control (scale 64 64 $ slow 9.587 sine) # ctlNum sli
+        , gain "1*16" # control (scale 64 64 $ slow 14.6801 sine) # ctlNum dfb
+    ] # s "midi" # midichan 15 # midicmd "control"
 
 d4 silence
 
@@ -36,10 +36,9 @@ d3 $ stack [ s "cantch*16", (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shif
 
 -- main start
 d3 $ stack [ 
-    whenmod 8 4 (# n 4) $ density 2 $ ((0.125*3) <~) $ s "cantk(3,8)" # cut 8
+    whenmod 8 4 (# n 4) $ density 2 $ ((0.125*3) <~) $ s "cantk(3,8)" # cut 8 # rel 1
     , every 4 (within ((0.375 + 0.0625), 0.5) (# s "cantoh")) $ s "cantch*16" # cut 1001
     , (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ] 
-
 
 
 hush

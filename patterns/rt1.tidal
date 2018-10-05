@@ -1,5 +1,17 @@
 bps (150/120)
 
+let env1 = 3
+    dec1 = 4
+    rel1 = 8
+    del1 = 9
+    rvb1 = 11
+    lfo1 = 64
+    lfo2 = 65
+    det2 = 66
+    cut2 = 67
+    sli2 = 68
+
+
 do
     let 
         one = "[7,11]"
@@ -30,7 +42,18 @@ do
         , sometimesBy 0.1 (# n 4) $ shift $ degradeBy 0.7 $ density 16 $ n 3 # cut 701
         , (0.0625 <~) $ n "2/2"
         , (0.5 <~) $ n 5 ] # s "rt1"
-
+    d9 $ stack [ 
+            gain "1*16" # control (scale 30 30 $ slow 13.1 sine) # ctlNum env1
+            , gain "1*16" # control (scale 54 54 $ slow 11.31 sine) # ctlNum dec1
+            , gain "1*16" # control (scale 54 54 $ slow 12.25 sine) # ctlNum rel1
+            , gain "1*16" # control (scale 60 70 $ slow 10.212 sine) # ctlNum del1
+            , gain "1*16" # control (scale 40 50 $ slow 8.41 sine) # ctlNum rvb1
+            , gain "1*16" # control (scale 0 1 $ slow 9.587 sine) # ctlNum lfo1
+            , gain "1*16" # control (scale 0 1 $ slow 14.6801 sine) # ctlNum lfo2
+            , gain "1*16" # control (scale 0 1 $ slow 15.6801 sine) # ctlNum det2
+            , gain "1*16" # control (scale 40 50 $ slow 10.06801 sine) # ctlNum cut2
+            , gain "1*16" # control (scale 0 1 $ slow 11.876 sine) # ctlNum sli2
+        ] # s "midi" # midichan 15 # midicmd "control"
 
         hush
 
