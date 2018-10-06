@@ -1,0 +1,11 @@
+-- turret
+
+d1 $ jux (iter 8) $ 
+    s "turret" 
+    # bpf (scale 200 2000 $ slow 7 sine) 
+    # orbit 1 
+    # room 0.5
+    # size 0.97
+    # n "[0 1 2]/12"
+    # gain 0.9
+

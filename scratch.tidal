@@ -1,23 +1,35 @@
-bps (200/120)
+-- lessmel
+-- turret
 
 
-do
-    let pat = "{1 ~ 1 0 ~ ~  1 0 0 0 1 0 1 0 0 0 0 1 1 1 ~ ~ ~ ~}%8"
-    let prog = "[0 [2 -2]]/2"
-    d1 $ stack [
-        (|+| note prog) $ gain (pat) # note "[12]" # midichan 15,
-        sometimes (|+| note 12) $ 
-            (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12 # gain 1.1] # s "midi" # sustain 0.1
-    d2 $ stack [
-            (|*| gain 0.9) $ 
-                gain pat # s "ch",
-            (|*| gain 1.1) $ 
-                gain (inv <$> pat) # s "k:3",
-            (|*| gain 0.85) $ 
-                superimpose ((#pan 0) . (# speed 0.7)) $ 
-                gain (inv <$> pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000
-        ]
 
-        hush
 
-        d1 $ s "midi" # midichan 12
+
+
+
+
+
+
+
+
+d1 $ jux (iter 8) $ 
+    s "turret" 
+    # bpf (scale 200 2000 $ slow 7 sine) 
+    # orbit 1 
+    # room 0.5
+    # size 0.97
+    # n "[0 1 2]/12"
+    # gain 0.9
+
+    d2
+
+d2 $ 
+    stack [
+    slow 3 $ s "sub",
+    every 5 rev $ every 4 (chop 32) $ 
+        every 3 (|*| speed "-1") $ (0.5 ~>) $ slow 2 $ jux (iter 8 . (# speed 0.8)) $ s "cpr", 
+    degradeBy 0.25 $ shift $ slow 2 $ s "k(3,8)" # rel 0.3 # speed 0.8 # n 40,
+    foldEvery [2,3,4] (density (1.5)) $ 
+        s "ch*8" # n 1 # bpf (scale 100 5000 $ slow 5.1 sine) # gain 0.9]
+
+    hush
