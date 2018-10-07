@@ -1,8 +1,8 @@
 -- all bi-polar cept for dfb/rvb
-let env = 3
-    res = 4
-    dec = 8
-    rell = 9
+let env1 = 3
+    res1 = 4
+    dec1 = 8
+    rel1 = 9
     fx = 11
     dfb = 64
     rvb = 65
@@ -30,10 +30,10 @@ do
         # nudge nudgs 
         # sustain "[0.2 0.3]/2"
     d3 $ shift' 4 $ stack [ 
-            gain gains # control (scale 64 95 $ slow 8 sine) # ctlNum env
-            , gain gains # control (scale 64 95 $ slow 9 sine) # ctlNum res
-            , gain gains # control (scale 64 70 $ slow 10 sine) # ctlNum dec
-            , gain gains # control (scale 64 70 $ slow 11 sine) # ctlNum rell
+            gain gains # control (scale 64 95 $ slow 8 sine) # ctlNum env1
+            , gain gains # control (scale 64 95 $ slow 9 sine) # ctlNum res1
+            , gain gains # control (scale 64 70 $ slow 10 sine) # ctlNum dec1
+            , gain gains # control (scale 64 70 $ slow 11 sine) # ctlNum rel1
             , gain gains # control (scale 60 90 $ slow 12 sine) # ctlNum fx
             , gain gains # control (scale 10 55 $ slow 13 rand) # ctlNum dfb
             , gain gains # control (scale 64 100 $ slow 14 sine) # ctlNum rvb

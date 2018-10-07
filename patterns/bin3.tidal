@@ -1,12 +1,14 @@
-bps (200/120)
+bps (120/120)
+
+
 
 
 do
-    let pat = "{1 ~ 1 0 ~ ~  1 0 0 0 1 0 1 0 0 0 0 1 1 1 ~ ~ ~ ~}%8"
+    let pat = "{1 ~ 1 0 ~ ~  1 0 0 0 1 0 1 0 0 0 0 1 1 1 ~ ~ ~ ~}%16"
     let prog = "[0 [2 -2]]/2"
     d1 $ stack [
-        (|+| note prog) $ gain (pat) # note "[12]" # midichan 15,
-        sometimes (|+| note 12) $ 
+        (|+| note prog) $ (|+| note 12) $ gain (pat) # note "[0,4,11]" # midichan 15,
+        g $ sometimes (|+| note 12) $ 
             (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12 # gain 1.1] # s "midi" # sustain 0.1
     d2 $ stack [
             (|*| gain 0.9) $ 
@@ -15,7 +17,7 @@ do
                 gain (inv <$> pat) # s "k:3",
             (|*| gain 0.85) $ 
                 superimpose ((#pan 0) . (# speed 0.7)) $ 
-                gain (inv <$> pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000
+                gain (pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000
         ]
 
         hush

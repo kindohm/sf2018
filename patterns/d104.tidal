@@ -17,16 +17,16 @@ d2 $
 
 
 d3 $ stack [
-        gain "1*16" # control (scale 64 80 $ slow 7 sine) # ctlNum env1
-        , gain "1*16" # control (scale 64 90 $ slow 8 sine) # ctlNum dec1
-        , gain "1*16" # control (scale 64 90 $ slow 9 sine) # ctlNum len1
-        , gain "1*16" # control (scale 64 120 $ slow 9.3988 sine) # ctlNum dly1
-        , gain "1*16" # control (scale 40 70 $ slow 6.3988 sine) # ctlNum cut2
-        , gain "1*16" # control (scale 64 80 $ slow 7.3988 sine) # ctlNum env2
-        , gain "1*16" # control (scale 64 100 $ slow 8.444 sine) # ctlNum lfo2
+        gain "1*16" # control (scale 64 64 $ slow 7 sine) # ctlNum env1
+        , gain "1*16" # control (scale 64 70 $ slow 8 sine) # ctlNum dec1
+        , gain "1*16" # control (scale 64 70 $ slow 9 sine) # ctlNum len1
+        , gain "1*16" # control (scale 10 40 $ slow 9.3988 sine) # ctlNum dly1
+        , gain "1*16" # control (scale 40 50 $ slow 6.3988 sine) # ctlNum cut2
+        , gain "1*16" # control (scale 64 70 $ slow 7.3988 sine) # ctlNum env2
+        , gain "1*16" # control (scale 0 1 $ slow 8.444 sine) # ctlNum lfo2
     ] # s "midi" # midicmd "control" # midichan 15
 
-
+d3 silence
 
 d4 $ 
     stack [ 

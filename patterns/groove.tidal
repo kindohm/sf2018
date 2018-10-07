@@ -23,41 +23,15 @@ do
                 density 2 $ (0.25 ~>) $ within (0.6,1) g $ s "grvperc(3,8)",
             slow 2 $ s "grvcp",
             sometimesBy 0.05 (|+| n 1) $ shift $ degradeBy 0.5 $ density 16 $ s "grvch" # cut "233" ] 
-    d4 $ g $ stack [ 
-        gain "1*8" # control (scale 64 74 $ slow 8 sine) # ctlNum cut1
+    d4 $ stack [ 
+        gain "1*8" # control (scale 65 74 $ slow 8 sine) # ctlNum cut1
         , gain "1*8" # control (scale 0 10 $ slow 6.331 sine) # ctlNum det1
         , gain "1*8" # control (scale 0 64 $ slow 7 sine) # ctlNum env1
         , gain "1*8" # control (scale 1 20 $ slow 9 sine) # ctlNum cut2
         , gain "1*8" # control (scale 0 30 $ slow 7.8329 sine) # ctlNum env2
         , gain "1*8" # control (scale 0 104 $ slow 8.8329 sine) # ctlNum dly2
         , gain "1*8" # control (scale 1 84 $ slow 6.8329 sine) # ctlNum rev2
-        , gain "1*8" # control (scale 1 10 $ slow 10.8329 sine) # ctlNum det2
+        , gain "1*8" # control (scale 0 30 $ slow 10.8329 sine) # ctlNum det2
         ] # s "midi" # midichan 15 # midicmd "control"
 
 hush
-
-do
-    let bpatMod p = every 1 (superimpose (degradeBy 0.4 . ((shift' 400 $ choose [(0.25),(0.125*3),(0.125*4),(0.125*6)]) ~>))) $ p
-    let bpat = bpatMod $ slowcat ["1", "1", "1", "~"]
-    let spat = slowcat ["~", "~", "~", "1"]
-    d1 $ stack [ 
-            density 2 $ gain bpat # midinote 0,
-            ((0.125*3) ~>) $ density 2 $ gain spat # midinote 1, 
-            ((0.0625*3) ~>) $ density (discretise (1/4) $ shift' 388 $ choose [1,2,4]) $ gain 1 # midinote 5, 
-            density 2 $ gain spat # midinote 3 ] # s "midi"
-    d2 $  density 2 $ (|+| note "-3") $ gain bpat # note "-12" # s "midi" # midichan 15
-
-
-
-    hush
-
-do
-    let pat  = "{1       ~ ~ 1 ~ 1 ~ ~}%16"
-        vpat = "{[0 1]/2 ~ ~ 1 ~ 1 ~ ~ }%16"
-        cpp  = "{1       ~ ~ ~ ~ ~ ~ ~}%16"
-    d1 $ s "~ ~ ~ rebcp" # lpf 2000
-    d3 $ s "[rebbd ~ ~ rebbd] ~" # lpf 200 # cut 2343
-    d2 $ (|+| note "12") $ 
-        gain pat # note "[0,2,4,11]" # midichan 15 # s "midi"
-
-        hush
