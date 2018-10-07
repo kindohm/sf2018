@@ -10,14 +10,14 @@ let
     lfo2 = 66
 
 d1 $ (|+| note "0") $
-    (|+| note "-3") $ note "{~ 0 -8 ~ ~ ~ ~ 0 ~ ~ [14 16 16]/3 ~ ~ ~ ~}%16" # s "midi" # midichan 15 # gain 1.15
+    (|+| note "-3") $ note "{~ 0 [-8 -8 -7]/3 ~ ~ ~ ~ ~ 0 ~ ~ [16 14 12 7]/4 ~ ~ ~ ~}%16" # s "midi" # midichan 15 # gain 1.15
 
 d2 $ 
-    (|+| note "12") $ (|+| note "-3") $ note "{~  ~ [0 2 -2 0] ~}%4" # s "midi" # midichan 14 # gain 1.15
+    (|+| note "12") $ (|+| note "-3") $ note "{~  ~ ~ [0 2 -2 0] ~}%4" # s "midi" # midichan 14 # gain 1.15
 
 
 d3 $ stack [
-        gain "1*16" # control (scale 64 64 $ slow 7 sine) # ctlNum env1
+        gain "1*16" # control (scale 0 0 $ slow 7 sine) # ctlNum env1
         , gain "1*16" # control (scale 64 70 $ slow 8 sine) # ctlNum dec1
         , gain "1*16" # control (scale 64 70 $ slow 9 sine) # ctlNum len1
         , gain "1*16" # control (scale 10 40 $ slow 9.3988 sine) # ctlNum dly1
@@ -29,9 +29,14 @@ d3 $ stack [
 d3 silence
 
 d4 $ 
+    every 7 (rev) $ whenmod 11 8 (jux (iter 8)) $
+    every 4 (rip 0.25 0.1) $ 
+    every 6 (rip' 0 1 8 0.125 0.125) $
+    rarely (stut' 1 (0.125*3) (|*| speed 1.5)) $ shift $
     stack [ 
-        density 2 $ s "~ shake" # speed "[0.8,1]",
+        density 2 $ (0.5 ~>) $ s "shake" # speed "[0.8,1]" # gain 0.95,
     stack [ n "0(3,8) [~ 0*4?]" # s "d104k" # cut 378, 
-    sometimes (off 0.0625 id) $ s "~ d104cp" ]  ] # gain 1.1
+    jux (iter 8) $ 
+        sometimes (off 0.0625 id) $ s "~ d104cp" ]  ] # gain 1.1
 
 hush
