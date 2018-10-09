@@ -19,15 +19,15 @@ do
             (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12] 
             # s "midi" # sustain 0.1
     d9 $ stack [ 
-            gain "1*4" # control (scale 30 50 $ slow 13.1 sine) # ctlNum env1
-            , gain "1*4" # control (scale 0 90 $ slow 11.31 sine) # ctlNum hpf1
+            gain "1*4" # control (scale 30 70 $ slow 13.1 sine) # ctlNum env1
+            , gain "1*4" # control (scale 0 100 $ slow 11.31 sine) # ctlNum hpf1
             , gain "1*4" # control (scale 0 80 $ slow 12.25 sine) # ctlNum rel1
-            , gain "1*4" # control (scale 0 70 $ slow 11.1258 sine) # ctlNum det1
-            , gain "1*4" # control (scale 30 60 $ slow 10.212 sine) # ctlNum env2
-            , gain "1*4" # control (scale 0 90 $ slow 8.41 sine) # ctlNum hpf2
-            , gain "1*4" # control (scale 0 80 $ slow 9.587 sine) # ctlNum rel2
-            , gain "1*4" # control (scale 0 80 $ slow 10.518 sine) # ctlNum det2
-            , gain "1*4" # control (scale 0 80 $ slow 7.918 sine) # ctlNum dfb
+            , gain "1*4" # control (scale 0 80 $ slow 11.1258 sine) # ctlNum det1
+            , gain "1*4" # control (scale 10 80 $ slow 10.212 sine) # ctlNum env2
+            , gain "1*4" # control (scale 20 100 $ slow 8.41 sine) # ctlNum hpf2
+            , gain "1*4" # control (scale 20 100 $ slow 9.587 sine) # ctlNum rel2
+            , gain "1*4" # control (scale 20 80 $ slow 10.518 sine) # ctlNum det2
+            , gain "1*4" # control (scale 0 70 $ slow 7.918 sine) # ctlNum dfb
             ] # s "midi" # midichan 15 # midicmd "control"
     d2 $ stack [
             (|*| gain 1.1) $ 
