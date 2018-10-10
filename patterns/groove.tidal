@@ -1,5 +1,22 @@
 bps (150/120)
 
+-- sample version
+do
+    let snarecut = 334
+    let bpat = gain (density 2 $ every 4 (const $ "~") $ randcat ["1", "1(3,8)", "1*2", "[1 1 ~ 1]", "[1 ~ ~ 1]"] )
+    d1 $ 
+        bpat # s "grvb" # cut snarecut # lpf 300 # gain 1.15
+    d3 $ ((0.0625*4) ~>) $ slow 2 $ s "grvm" # gain 1.1
+    d2 $ (|*| gain 1.15) $ stack [ 
+            bpat # s "grvk" # lpf 200,
+            (0.5 ~>) $ slow 2 $ s "k:8" # speed 0.8,
+            g $ slow (discretise 1 $ choose [1,1,2,2]) $ stut' 1 (0.0625) (|+| n (shift' 4 $ choose [1,2])) $ 
+                density 2 $ (0.25 ~>) $ within (0.6,1) g $ s "grvperc(3,8)" # hpf 1000,
+            slow 2 $ s "grvcp" # cut snarecut # lpf 2000,
+            g $ sometimesBy 0.05 (|+| n 1) $ shift $ degradeBy 0.5 $ density 16 $ s "grvch" # cut "233" ] 
+
+            hush
+
 let 
     cut1 = 3
     det1 = 8
@@ -9,6 +26,8 @@ let
     dly2 = 66
     rev2 = 67
     det2 = 68
+
+
 
 --newer version
 do
@@ -35,3 +54,6 @@ do
         ] # s "midi" # midichan 15 # midicmd "control"
 
 hush
+
+d1 $ (|+| note "-12") $ 
+    s "midi" # midichan 15 # note "[-3 ~]/2"

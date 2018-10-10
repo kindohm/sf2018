@@ -21,17 +21,6 @@ do
     d3 $ pmod1' $ 
         density 2 $ (|+| note (shift' 3819 $ choose [0,12])) $ 
         (|+| note "-8") $ gain "1(3,8)" # note "[0,7,11]" #  s "midi" # midichan 14
-    d9 $ stack [ 
-            gain "1(3,8)" # control (scale 50 50 $ slow 13.1 sine) # ctlNum cut1
-            , gain "1(3,8)" # control (scale 0 10 $ slow 11.31 sine) # ctlNum env1
-            , gain "1(3,8)" # control (scale 64 64 $ slow 12.25 sine) # ctlNum dec1
-            , gain "1(3,8)" # control (scale 64 64 $ slow 10.212 sine) # ctlNum rel1
-            , gain "1(3,8)" # control (scale 45 45 $ slow 8.41 sine) # ctlNum cut2
-            , gain "1(3,8)" # control (scale 0 5 $ slow 9.587 sine) # ctlNum env2
-            , gain "1(3,8)" # control (scale 74 94 $ slow 14.6801 sine) # ctlNum dec2
-            , gain "1(3,8)" # control (scale 74 94 $ slow 15.6801 sine) # ctlNum rel2
-            , gain "1(3,8)" # control (scale 0 30 $ slow 10.06801 sine) # ctlNum det2
-        ] # s "midi" # midichan 15 # midicmd "control"
     -- drums
     d1 $ 
         stack [        
