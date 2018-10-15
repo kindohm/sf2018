@@ -8,7 +8,7 @@ let npat = "[0 2 4 6]/24"
             every 10 (|*| speed "-1") $ every 11 (randRev) $ 
             p
 
-d2 $ (# lpf (scale 500 2000 $ slow 20 tri)) $ 
+bg1 $ (# lpf (scale 500 2000 $ slow 20 tri)) $ 
   (# n "[1 0 2 3]/12") $ 
   (# up "[0,[-7 -5]/8,4,7,14]") $ 
   slow "{8 4 16 6 24 12}%4" $ 

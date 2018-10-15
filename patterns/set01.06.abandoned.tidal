@@ -12,12 +12,12 @@ let cut1 = 3
     rel2 = 67
     fx2 = 68
 
-d1 $ stack [
-    (|+| note 0) $ slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.2,
-    g $ note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 ] # gain 1.15
+a1 $ slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.2
+
+a2 $ g $ note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 # gain 1.15
 
 
-d2 $ stack [
+cc $ stack [
     gain "1*8" # control (scale 60 60 $ slow 10 sine) # ctlNum cut1
     , gain "1*8" # control (scale 74 74 $ slow 12 sine) # ctlNum env1
     , gain "1*8" # control (scale 54 64 $ slow 13 sine) # ctlNum dec1

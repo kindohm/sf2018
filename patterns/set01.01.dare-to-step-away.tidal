@@ -12,17 +12,17 @@ let
     rel2 = 67
 
 -- wavpad
-d5 $ (# pan (rand)) $ (# speed "1") $
+bg1 $ (# pan (rand)) $ (# speed "1") $
     slow 8 $ zoom (0,0.5) $ striate' 128 (1/20) $ s "syn" # gain 1.25 
 
-d1 $ (|+| note "-12") $ (|+| note "-4") $     
+a1 $ (|+| note "-12") $ (|+| note "-4") $     
     stack [note "{0 ~ ~}%8" ] # s "midi" # midichan 15 # gain 1.15
 
-d2 $ (|+| note "0") $
+a2 $ (|+| note "0") $
     (0.25 <~) $ density 2 $ (|+| note "-12") $
     every 2 (id) $ note "[1,16]" # s "midi" # midichan 14 # gain 1.15
 
-d9 $ stack [ 
+cc $ stack [ 
     gain "1*8" # control (scale 34 34 $ slow 8 sine) # ctlNum cut1
     , gain "1*8" # control (scale 74 74 $ slow 6.331 sine) # ctlNum env1
     , gain "1*8" # control (scale 0 10 $ slow 7 sine) # ctlNum dec1

@@ -11,13 +11,13 @@ let
 hush
 
 do
-    d1 $ 
+    a1 $ 
         density 2 $ note "[0,4,9,11]" 
         # s "midi" 
         # midichan 15 
         # sustain 0.1        
         # gain 1.1
-    d2 $ stack [
+    cc $ stack [
             density 2 $ control "[0 127]/8" # ctlNum chd
             , gain 1 # control (scale 54 54 $ slow 10 sine) # ctlNum cut1
             , gain 1 # control (scale 10 10 $ slow 9 sine) # ctlNum env1
@@ -29,7 +29,7 @@ do
         # midichan 15 
         # midicmd "control"
     -- artk, artcp, arts, artch, artperc
-    d3 $ 
+    d1 $ 
         stack [ ]
 
 hush

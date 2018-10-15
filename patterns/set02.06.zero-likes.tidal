@@ -1,26 +1,26 @@
 bps (200/120)
 
 -- bass
-d1 $ whenmod 16 8 (|+| note "-5") $ (|+| note (choose[0,12,0])) $ shift' 81 $
+a1 $ whenmod 16 8 (|+| note "-5") $ (|+| note (choose[0,12,0])) $ shift' 81 $
     degradeBy 0.4 $ shift' 82 $ (|+| note "0") $ (|+| note "9") $  (|+| note (shift' 99 $ choose mpent)) $ note "-24"
         # s "midi" # midichan 15 # sustain 1 # gain 1.1
 
 -- arps
-d2  $ whenmod 16 8 (|+| note "-5") $ (|+| note (shift' 1011 $ choose [-12,0,12])) $ shift' 66 $ 
+a2  $ whenmod 16 8 (|+| note "-5") $ (|+| note (shift' 1011 $ choose [-12,0,12])) $ shift' 66 $ 
     (|+| note "9") $ 
     (# note (shift' 98 $ choose mpent)) $ gain "{1*4 1*4 ~ ~ ~ ~ ~}%2" # s "midi" # midichan 14
 
 
 -- strings
-d8 $ slow 8 $ whenmod 16 8 (|+| note "-5") $
-stack [(|+| note (shift' 44 $ choose[0,0,-12])) $ shift' 71 $ (|+| note "-12") $ (|+| note "9") $
-(|+| note (shift' 47 $ choose mpent)) $
-note "{0 ~ ~ ~ ~}%4" # sustain (scale 1 2 $ slow 3 rand),
-(|+| note (shift' 45 $ choose[12,0,0,-12])) $ shift' 7 $ (|+| note "9") $
-(|+| note (shift' 46 $ choose mpent)) $
-note "{0 ~ ~}%8" # sustain (scale 2 3 $ slow 3.3 rand)] # s "midi" # midichan 13
+a3 $ slow 8 $ whenmod 16 8 (|+| note "-5") $
+    stack [
+        (|+| note (shift' 44 $ choose[0,0,-12])) $ shift' 71 $ (|+| note "-12") $ (|+| note "9") $
+            (|+| note (shift' 47 $ choose mpent)) $
+            note "{0 ~ ~ ~ ~}%4" # sustain (scale 1 2 $ slow 3 rand),
+        (|+| note (shift' 45 $ choose[12,0,0,-12])) $ shift' 7 $ (|+| note "9") $
+            (|+| note (shift' 46 $ choose mpent)) $
+            note "{0 ~ ~}%8" # sustain (scale 2 3 $ slow 3.3 rand)] # s "midi" # midichan 13
 
-hush
 
 -- k run, zls, ch:9, peri, pson, doru, wet
 

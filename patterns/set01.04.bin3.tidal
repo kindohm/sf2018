@@ -15,11 +15,9 @@ do
     let pat = (density 2 $ slowcat ["0(3,8)", "~", "0*4?", "1"])
     let prog = "[0 -2]/4"
     -- synths
-    d1 $ stack [
-        (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15,
-        (|*| gain 1.15) $ (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12] 
-            # s "midi" # sustain 0.1
-    d9 $ stack [ 
+    a1 $ (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15 # s "midi"
+    a2 $ (|*| gain 1.15) $ (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12 # s "midi" # sustain 0.1
+    cc $ stack [ 
             gain "1*4" # control (scale 30 30 $ slow 13.1 sine) # ctlNum env1
             , gain "1*4" # control (scale 0 0 $ slow 11.31 sine) # ctlNum hpf1
             , gain "1*4" # control (scale 0 40 $ slow 12.25 sine) # ctlNum rel1
@@ -30,7 +28,7 @@ do
             , gain "1*4" # control (scale 0 10 $ slow 10.518 sine) # ctlNum det2
             , gain "1*4" # control (scale 0 10 $ slow 7.918 sine) # ctlNum dfb
             ] # s "midi" # midichan 15 # midicmd "control"
-    d2 $ stack [            
+    d1 $ stack [            
                 gain (inv <$> pat) # s "artk" # rel 0.3,
                 superimpose ((#pan 0) . (|*| speed 0.8)) $ 
                     gain (pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000

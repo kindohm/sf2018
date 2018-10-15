@@ -17,15 +17,15 @@ let
 do
     let pat = "{1 1 1 0 [0] 1 0 1 0 1 ~ ~ ~ ~ 1 1 0  ~ }%8"
     -- synth
-    d1 $ stack [
+    a1 $ stack [
             gain (inv <$> pat) # note "[0,2,5]" # midichan 15,
             gain (pat) # note (shift' 33 $ choose [0,0,0,-12,12]) # midichan 12] # s "midi"
     -- drums
-    d2 $ g $ stack [ 
+    d1 $ g $ stack [ 
             gain pat # s "k" # n 1,
             (|*| gain 0.9) $ gain (inv <$> pat) # s "cp"
         ]
-    d3 $ stack [
+    cc $ stack [
             gain "1*8" # control (scale 0 5 $ slow 10 tri) # ctlNum env1
             , gain "1*8" # control (scale 0 50 $ slow 9 tri) # ctlNum rel1
             , gain "1*8" # control (scale 10 30 $ slow 12 tri) # ctlNum dly1
@@ -38,6 +38,4 @@ do
                 # s "midi" 
                 # midichan 15 # midicmd "control"
 
-    d3 silence
 
-        hush

@@ -19,7 +19,7 @@ do
     d1 $ shift' 4 $ 
         stack [ 
             gain gains # s "[~ ~]/2"] 
-    d2 $ (|*| gain 1.15) $ 
+    a1 $ (|*| gain 1.15) $ 
         sometimesBy 0 (stut' (shift' 11 $ choose [1,2,3]) (0.125) (|+| note (shift' 301 $ choose [5,7,12,14]))) $ 
         shift' 4 $
         (|+| note "0") $
@@ -28,7 +28,7 @@ do
         # s "midi" 
         # midichan 15 
         # sustain "[0.2 0.3]/2"
-    d3 $ shift' 4 $ stack [ 
+    cc $ shift' 4 $ stack [ 
             gain gains # control (scale 64 65 $ slow 8 sine) # ctlNum env1
             , gain gains # control (scale 64 65 $ slow 9 sine) # ctlNum res1
             , gain gains # control (scale 64 64 $ slow 10 sine) # ctlNum dec1
