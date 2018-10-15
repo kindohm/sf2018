@@ -87,8 +87,17 @@ let discretise = _discretise
       where b = (\i n -> (div' i n)) <$> pi <*> pn
             e = (\i n -> (div' i n) + (div' 1 n)) <$> pi <*> pn
             div' a b = fromIntegral (a `mod` b) / fromIntegral b
-
-
+    suboh x p = sometimesBy x (|+| n 1) $ p
+    stutoh x y p = sometimesBy x (stut' 1 y (|+| n 1)) $ p
+    thicken' x percent p = superimpose ((# pan 1) . (|*| speed percent)) $ ((# speed x) . (# pan 0)) $ p
+    thicken p = thicken' 1 0.8 $ p
+    thick3n = thicken
+    thick3n' = thicken'    
+    rollany x p = stut' 1 x id $ p
+    roll p = rollany (0.125*3) $ p
+    roll' p = rollany (0.0625*3) $ p
+    roll'' p = stut' 1 (shift' 100000 $ choose [(0.0625*3), (0.125*3)]) id $ p
+    rollAny = rollany
 
 -- A: 3
 -- B: 4

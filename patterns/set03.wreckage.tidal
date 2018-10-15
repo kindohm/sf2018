@@ -8,13 +8,5 @@ d2 $ slow 18 $ (|+| note (shift' 100 $ choose [0,12,0])) $
     note "[{0 -5 -3 -8 -2}%4, {0 5 7 -2 9 11 14}%4, {4 0 12 11 9 5}%4]" # s "midi" # midichan 14
     # sustain (scale 2 3 $ shift' 100 rand) # gain 1
 
-d3 $
-    stack [
-      degradeBy 0.3 $ shift $ 
-        sometimes (density 2) $ sound "{[vixbd, [vixcy/12]] ~ ~ ~ ~ ~ vixbt/4}%4",
-      sound "{~ ~ ~ ~ [~ vixsd/2]}%4",
-      slow 2 $ sound "~ vixcp ~ ~",
-      jux (iter 8) $ sound "~ ~ vixch*2 ~",
-      sound "{[~ vixrs] ~ vixrs ~ ~}%2" ]
-    
-      hush
+-- vix bd, cy, bt, sd, cp, ch, rs
+

@@ -7,7 +7,7 @@ let env1 = 3
     dfb = 64
     rvb = 65
 
-    bps (240/120)
+bps (240/120)
 
 
     -- church, k, cp, ch, b, cb
@@ -15,7 +15,8 @@ let env1 = 3
 do
     let gains = (degradeBy (shift' 2 $ "[0.4 0]/2") $ slowcat ["1(<3 5 4 6 2>,<8>)", "1" ])
     let mod p = id $ p
-    d1 $ (|*| gain 1.1) $ shift' 4 $ 
+    -- drums
+    d1 $ shift' 4 $ 
         stack [ 
             gain gains # s "[~ ~]/2"] 
     d2 $ (|*| gain 1.15) $ 

@@ -1,7 +1,5 @@
 bps (150/120)
 
--- sample version
-
 -- grvperc, grvcp, grvch, k:8, grvm!!
 
 do
@@ -11,7 +9,6 @@ do
         bpat # s "grvb" # cut snarecut # lpf 200 # gain 1.15
     d2 $ (|*| gain 1.15) $ stack [ 
             bpat # s "grvk" # lpf 2000 # hpf 200,
-            g $ (0.5 ~>) $ slow 2 $ s "k:8" # speed 0.8,
             (# gain 0) $ slow 2 $ s "grvcp" # cut snarecut # lpf 2000] 
 
             hush
@@ -32,7 +29,10 @@ let
     rev2 = 67
     det2 = 68
 
-
+let buzz p =
+        do s <- choose [0,0.25,0.5,0.75]
+           e <- toRational <$> (scale 0.2 0.5 rand)
+           within (s,s+e) (stut (choose [2,4,6]) 1 (choose [(1/2),(1/4),(1/8)])) $ (# cut 99) p
 
 --newer version
 do

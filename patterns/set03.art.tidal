@@ -11,7 +11,7 @@ let
 hush
 
 do
-    d1 $ sometimes (stut' (shift' 4481 $ choose [1,2]) (0.125*3) (|+| note (shift' 991 $ choose [12,-12]))) $
+    d1 $ 
         density 2 $ note "[0,4,9,11]" 
         # s "midi" 
         # midichan 15 
@@ -28,15 +28,8 @@ do
         # s "midi" 
         # midichan 15 
         # midicmd "control"
-    d3 $ whenmod 9 7 (jux rev) $  
-        stack [ 
-        sometimes (density 2) $ s "artk(3,8)",
-        s "~ artcp [~ artcp] ~",
-            every 5 (stut' 8 (0.0625) (|*| gain 0.9)) $
-            s "~ arts" # rel 0.3,
-        rarely (stut' 1 (0.0625*3) (|+| n 1)) $ 
-            (0.375 ~>) $ density 4 $ every 4 (0.25 ~>) $ s "artch" # cut 61,
-        degradeBy 0.5 $ 
-            s "artperc*16" # n (shift' 44 $ irand 3) ]
+    -- artk, artcp, arts, artch, artperc
+    d3 $ 
+        stack [ ]
 
 hush

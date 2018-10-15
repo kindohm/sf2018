@@ -1,0 +1,14 @@
+bps (150/120)
+
+-- sfkit2 0,1,2[3]
+
+do
+    let pat = "{1 [~ 1] ~ 0 ~ 0 1 0 1 1}%8"
+    d1 $ 
+        stack [
+        gain (pat) # s "sfkit2" # rel 0.5,
+        gain (inv <$> pat) # s "sfkit2" # n 1,
+        stutoh 0.2 0.0625 $ gain (pat) # s "sfkit2" # n 2 # cut 44]
+
+d2 $ slow 2 $ every 4 (stut' 1 (0.25) (# n 1)) $ s "sfstab2" # cut 2 # n 0
+

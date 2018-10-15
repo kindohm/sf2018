@@ -16,6 +16,10 @@ import Sound.Tidal.Context
 (d8,t8) <- superDirtSetters getNow
 (d9,t9) <- superDirtSetters getNow
 
+(s1,ts1) <- superDirtSetters getNow
+(s2,ts2) <- superDirtSetters getNow
+(cc,tcc) <- superDirtSetters getNow
+
 (midicmd, midicmd_p) = pS "midicmd" (Nothing)
 (midichan, midichan_p) = pF "midichan" (Nothing)
 (progNum, progNum_p) = pF "progNum" (Nothing)
@@ -35,7 +39,7 @@ import Sound.Tidal.Context
 
 let bps x = cps (x/2)
 let bpm x = bps (x/120)
-let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9]
+let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9,d1,s2,cc]
 let solo = (>>) hush
 
 :set prompt "tidal> "

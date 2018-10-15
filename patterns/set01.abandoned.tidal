@@ -16,8 +16,6 @@ d1 $ stack [
     (|+| note 0) $ slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.2,
     g $ note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 ] # gain 1.15
 
-        shush
-
 
 d2 $ stack [
     gain "1*8" # control (scale 60 60 $ slow 10 sine) # ctlNum cut1

@@ -12,7 +12,7 @@ let
 d1 $ (|+| note "-24") $ 
     (|+| note "-4") $ slow 4 $ note "[0 ~ ~ [~ 11/2 ~ ~]]" # s "midi" # midichan 15 # sustain 0.3
 
-d4 $ sometimes (stut' (shift' 410 $ choose [1,2]) (0.125) (|+| note 12)) $ shift' 8 $
+d4 $ 
     (0.5 ~>) $ (|+| note 12) $ (|+| note "-4") $ note "0(3,8)" # s "midi" # midichan 14
 
 d9 $ stack [ 
