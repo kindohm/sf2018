@@ -14,9 +14,9 @@ let
 do
     let pat = (density 2 $ slowcat ["0*2 0*4 0*3", "0*4 0*2 [1 0]/2 [~ [1 0 0]/3]", "0*3", "1 0*4?"])
     let prog = "[0 -2]/4"
-    d1 $ (|*| gain 1.15) $ stack [
-        (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15,
-            (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12] 
+    d1 $ stack [
+        (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15,
+        (|*| gain 1.15) $ (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12] 
             # s "midi" # sustain 0.1
     d9 $ stack [ 
             gain "1*4" # control (scale 30 70 $ slow 13.1 sine) # ctlNum env1
@@ -31,6 +31,38 @@ do
             ] # s "midi" # midichan 15 # midicmd "control"
     d2 $ stack [
             (|*| gain 1.1) $ 
+                gain (inv <$> pat) # s "artk" # rel 0.3,
+            (|*| gain 1) $ 
+                superimpose ((#pan 0) . (|*| speed 0.8)) $ 
+                gain (pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000
+        ]
+
+        hush
+
+
+
+-- recording
+do
+    let pat = (density 2 $ slowcat ["0*2 0*4 0*3", "0*4 0*2 [1 0]/2 [~ [1 0 0]/3]", "[0*3 0*2 0*4?]/3", "1 0*4?"])
+    let prog = "[0 -2]/4"
+    let nud p = id $ p
+    d1 $ nud $ stack [
+        (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15,
+        (|*| gain 1.1) $ (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12] 
+            # s "midi" # sustain 0.1
+    d9 $ nud $ stack [ 
+            gain pat # control (scale 10 30 $ slow 13.1 sine) # ctlNum env1
+            , gain pat # control (scale 10 50 $ slow 11.31 sine) # ctlNum hpf1
+            , gain pat # control (scale 10 100 $ slow 12.25 sine) # ctlNum rel1
+            , gain pat # control (scale 10 80 $ slow 11.1258 sine) # ctlNum det1
+            , gain pat # control (scale 10 30 $ slow 10.212 sine) # ctlNum env2
+            , gain pat # control (scale 10 50 $ slow 8.41 sine) # ctlNum hpf2
+            , gain pat # control (scale 20 100 $ slow 9.587 sine) # ctlNum rel2
+            , gain pat # control (scale 20 80 $ slow 10.518 sine) # ctlNum det2
+            , gain pat # control (scale 10 80 $ slow 7.918 sine) # ctlNum dfb
+            ] # s "midi" # midichan 15 # midicmd "control"
+    d2 $ nud $ stack [
+            (|*| gain 1) $ 
                 gain (inv <$> pat) # s "artk" # rel 0.3,
             (|*| gain 1) $ 
                 superimpose ((#pan 0) . (|*| speed 0.8)) $ 

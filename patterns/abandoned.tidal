@@ -13,19 +13,20 @@ let cut1 = 3
     fx2 = 68
 
 d1 $ stack [
-    g $ rarely (stut' (shift' 55 $ choose [1,2]) (0.125*3) (|+| note 12)) $ shift' 22 $ 
-        slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.1,
-    rarely (stut' (shift' 843 $ choose [1,2]) (0.125*3) (|+| note 12)) $ shift $ 
-        note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 ] # gain 1.15
+    (|+| note 0) $ slow 2 $ note "0 [~ 2] ~ -3 [~ 2] ~ [~ 5]/2 [~ 7]/2" # s "midi" # midichan 15 # sustain 0.2,
+    g $ note "{~ 0 5 7 14 12 14 ~ ~ ~ ~ ~ ~}%16" # s "midi" # midichan 14 ] # gain 1.15
+
+        shush
+
 
 d2 $ stack [
-    gain "1*8" # control (scale 54 64 $ slow 10 sine) # ctlNum cut1
-    , gain "1*8" # control (scale 74 94 $ slow 12 sine) # ctlNum env1
+    gain "1*8" # control (scale 60 60 $ slow 10 sine) # ctlNum cut1
+    , gain "1*8" # control (scale 74 74 $ slow 12 sine) # ctlNum env1
     , gain "1*8" # control (scale 54 64 $ slow 13 sine) # ctlNum dec1
     , gain "1*8" # control (scale 64 74 $ slow 5 sine) # ctlNum rel1
-    , gain "1*8" # control (scale 44 64 $ slow 9 sine) # ctlNum fx1
+    , gain "1*8" # control (scale 64 64 $ slow 9 sine) # ctlNum fx1
     , gain "1*8" # control (scale 64 64 $ slow 9.52 sine) # ctlNum cut2
-    , gain "1*8" # control (scale 64 84 $ slow 6.5232 sine) # ctlNum env2
+    , gain "1*8" # control (scale 64 64 $ slow 6.5232 sine) # ctlNum env2
     , gain "1*8" # control (scale 64 64 $ slow 8.324 sine) # ctlNum dec2
     , gain "1*8" # control (scale 64 64 $ slow 7.9918 sine) # ctlNum rel2
     , gain "1*8" # control (scale 64 64 $ slow 6.7716 sine) # ctlNum fx2
@@ -34,26 +35,3 @@ d2 $ stack [
 
 -- k:5, rss, shake
 
-d9 $ g $ every 6 (rev) $ every 4 (rip 0.5 0.1) $ 
-    every 5 (rip' 0 1 8 0.25 0.25) $ whenmod 8 6 (jux (iter 8)) $ 
-    stack [
-    density 2 $ s "~ shake",
-    rarely (stut' 1 (0.0625) (id)) $ shift $ 
-        s "k:5(3,8) ~" # rel "0.4",
-        sometimes (stut' 1 (0.0625*3) (id)) $ shift $ (0.5 ~>) $ s "rss",
-        degradeBy 0.5 $ shift' 99 $ slowcat [brakk "jung4*8", brakk "jung5*8", brakk "jung6*8"],
-        g $ degradeBy 0.4 $ s "{tite wet pson tite tite}%16" 
-            # n (shift' 44 $ irand 20) # speed 1.5 # cut 4410 ]
-
-hush
-
--- A: 3
--- B: 4
--- C: 8
--- D: 9
--- E: 11
--- F: 64
--- G: 65
--- H: 66
--- I: 67
--- J: 68

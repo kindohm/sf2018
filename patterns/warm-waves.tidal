@@ -6,6 +6,7 @@ let
     dfb = 11
     env2 = 64
     hpf2 = 65
+    sli2 = 66
 
 
 d1 $ (|+| note "-24") $ 
@@ -15,11 +16,12 @@ d4 $ sometimes (stut' (shift' 410 $ choose [1,2]) (0.125) (|+| note 12)) $ shift
     (0.5 ~>) $ (|+| note 12) $ (|+| note "-4") $ note "0(3,8)" # s "midi" # midichan 14
 
 d9 $ stack [ 
-    gain "1*8" # control 50 # ctlNum env1
-    , gain "1*8" # control 50 # ctlNum len1
+    gain "1*8" # control 74 # ctlNum env1
+    , gain "1*8" # control 74 # ctlNum len1
     , gain "1*8" # control 10 # ctlNum dfb
-    , gain "1*8" # control 50 # ctlNum env2
-    , gain "1*8" # control 90 # ctlNum hpf2
+    , gain "1*8" # control 30 # ctlNum env2
+    , gain "1*8" # control 10 # ctlNum hpf2
+    , gain "1*8" # control 10 # ctlNum sli2
     ] # s "midi" # midichan 15 # midicmd "control"
 
 hush
@@ -30,8 +32,10 @@ d3 $ every 2 rev $
     # orbit 1
     # delayt 0.3 # delayfb 0.5 # delay 0.5 # gain 1
 
-d2 $ whenmod 10 8 (jux rev) $ 
-    every 7 (rev) $ every 5 (rip 0.5 0.1) $ every 6 (rip' 0 1 8 0.25 0.25) $ stack [
+
+-- wwk, wws, wwt
+
+d2 $ stack [
     s "{wwt*2 wwt ~ ~ ~}%4" # gain 0.9,
     every 3 (# speed "-1") $ every 5 (chop 16) $ s "~ cpr/4",
     sometimes (stut' 1 (0.125*3) id) $ 

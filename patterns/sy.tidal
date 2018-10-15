@@ -1,0 +1,27 @@
+bps (130/120)
+
+let 
+    cut1 = 3
+    env1 = 4
+    dec1 = 8
+    rel1 = 9
+    hpf1 = 11
+    sli1 = 64
+    dfb = 68
+
+d1 $ 
+    (|+| note "-12") $ slow 2 $ 
+    note "0 [10 7] [12 10] [7 12] [~ 10] [7 12] [~ 10] [3 7]" # s "midi" # midichan 15 # gain 1.1
+
+d9 $ stack [ 
+    gain "1*8" # control 64 # ctlNum cut1
+    , gain "1*8" # control 0 # ctlNum env1
+    , gain "1*8" # control 64 # ctlNum dec1
+    , gain "1*8" # control 64 # ctlNum rel1
+    , gain "1*8" # control 0 # ctlNum hpf1
+    , gain "1*8" # control 0 # ctlNum sli1
+    , gain "1*8" # control 0 # ctlNum dfb
+    ] # s "midi" # midichan 15 # midicmd "control"
+    
+
+hush

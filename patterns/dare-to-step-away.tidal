@@ -12,7 +12,7 @@ let
     rel2 = 67
 
 d1 $ (|+| note "-12") $ (|+| note "-4") $     
-    stack [note "{0 0/3 1?}%8" ] # s "midi" # midichan 15 # gain 1.15
+    stack [note "{0 ~ ~}%8" ] # s "midi" # midichan 15 # gain 1.15
 
 d2 $ (|+| note "0") $
     (0.25 <~) $ density 2 $ (|+| note "-12") $
@@ -20,13 +20,13 @@ d2 $ (|+| note "0") $
     
 
 d4 $ stack [ 
-    gain "1*8" # control (scale 24 34 $ slow 8 sine) # ctlNum cut1
-    , gain "1*8" # control (scale 74 94 $ slow 6.331 sine) # ctlNum env1
+    gain "1*8" # control (scale 34 34 $ slow 8 sine) # ctlNum cut1
+    , gain "1*8" # control (scale 74 74 $ slow 6.331 sine) # ctlNum env1
     , gain "1*8" # control (scale 0 10 $ slow 7 sine) # ctlNum dec1
     , gain "1*8" # control (scale 0 14 $ slow 9 sine) # ctlNum rel1
     , gain "1*8" # control (scale 44 84 $ slow 7.8329 sine) # ctlNum dfb
-    , gain "1*8" # control (scale 34 54 $ slow 8.8329 sine) # ctlNum cut2
-    , gain "1*8" # control (scale 84 95 $ slow 6.8329 sine) # ctlNum env2
+    , gain "1*8" # control (scale 34 34 $ slow 8.8329 sine) # ctlNum cut2
+    , gain "1*8" # control (scale 80 80 $ slow 6.8329 sine) # ctlNum env2
     , gain "1*8" # control (scale 64 64 $ slow 10.8329 sine) # ctlNum dec2
     , gain "1*8" # control (scale 14 64 $ slow 11.8329 sine) # ctlNum rel1
     ] # s "midi" # midichan 15 # midicmd "control"
