@@ -23,6 +23,6 @@ a3 $ slow 8 $ whenmod 16 8 (|+| note "-5") $
 
 
 -- k run, zls, ch:9, peri, pson, doru, wet
-
+d1 $ slow 2 $ stack [ ]
 
 hush

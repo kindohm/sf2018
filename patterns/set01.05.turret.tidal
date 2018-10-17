@@ -1,5 +1,5 @@
 -- turret
-bps (180/120)
+bps (185/120)
 
 d1 $ jux (iter 8) $ 
     s "turret" 

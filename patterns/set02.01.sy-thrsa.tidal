@@ -15,7 +15,7 @@ a1 $
 
 cc $ stack [ 
     gain "1*8" # control 64 # ctlNum cut1
-    , gain "1*8" # control 0 # ctlNum env1
+    , gain "1*8" # control 0 # ctlNum env1 --from 0!!!
     , gain "1*8" # control 64 # ctlNum dec1
     , gain "1*8" # control 64 # ctlNum rel1
     , gain "1*8" # control 0 # ctlNum hpf1

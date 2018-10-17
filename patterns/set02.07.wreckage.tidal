@@ -10,3 +10,22 @@ a2 $ slow 18 $ (|+| note (shift' 100 $ choose [0,12,0])) $
 
 -- vix bd, cy, bt, sd, cp, ch, rs
 
+
+
+
+
+
+
+
+
+
+
+
+d1 $ stack [
+  g $ sometimes (density 2) $ sound "{vixbd ~ ~ ~ ~ ~ vixbt/2}%4" # n (irand 20),
+  g $ sound "{~ ~ ~ ~ [~ vixsd/2]}%4",
+  g $ slow 2 $ sound "~ vixcp ~ ~",
+  g $ sound "~ ~ vixch*2 ~",
+  g $ sound "{[~ vixrs] ~ vixrs ~ ~}%2" ]
+
+  hush

@@ -17,7 +17,7 @@ let
 do
     let pat = "{1 1 1 0 [0] 1 0 1 0 1 ~ ~ ~ ~ 1 1 0  ~ }%8"
     -- synth
-    a1 $ stack [
+    a1 $ (|*| gain 1.1) $ stack [
             gain (inv <$> pat) # note "[0,2,5]" # midichan 15,
             gain (pat) # note (shift' 33 $ choose [0,0,0,-12,12]) # midichan 12] # s "midi"
     -- drums
@@ -39,3 +39,4 @@ do
                 # midichan 15 # midicmd "control"
 
 
+hush

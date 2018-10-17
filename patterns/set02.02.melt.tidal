@@ -6,30 +6,6 @@ bps (150/120)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 d1 $ foldEvery [2,3] (0.25 <~) $ 
     stack [ 
     slow 2 $ sound "vocad" 
@@ -37,18 +13,13 @@ d1 $ foldEvery [2,3] (0.25 <~) $
         # gain "1" 
         # cut "1", 
     degradeBy 0.3 $ shift $ whenmod 14 10 (# up "-2") $ sound "~ bor" # cut "10"
-        # gain "1", 
-    degradeBy 0.4 $ shift $ gain "1*16" 
-            # sound (shift' 44101 $ choose ["tite", "stite", "peri", "kit3", "ulh", "ulp", "untuned" ]) -- "[tite stite peri kit3 tite kit3 tite ul]" 
-            # n (slow 0.8 $ run 23)
-            # lpf 5000
-            # end (scale 0.1 0.5 $ slow 2.91 $ sine) 
-            # speed "[2 3 1.5 2.5]/5",
-    degradeBy 0.4 $ 
-        whenmod 14 10 (|+| note "0") $
-        sometimes (off 0.0625 (|+| note 12)) $ 
-        (|+| note "12") $
-        gain "1*8" # note (shift' 401 $ choose mpent) # s "midi" # midichan 15
- ]
+        # gain "1" ]
+
+a1 $ degradeBy 0.4 $ 
+    whenmod 14 10 (|+| note "0") $
+    sometimes (off 0.0625 (|+| note 12)) $ 
+    (|+| note "12") $
+    gain "1*8" # note (shift' 401 $ choose mpent) # s "midi" # midichan 15
 
 
+hush
