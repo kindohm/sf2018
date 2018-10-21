@@ -3,21 +3,31 @@ bps (150/120)
 -- tite, stite, peri, kit3, ulh, ulp, untutned
 -- bor vocad
 
+a2 silence
 
 
-
-d1 $ foldEvery [2,3] (0.25 <~) $ 
+d1 $
     stack [ 
-    slow 2 $ sound "vocad" 
+    move $ slow 2 $ sound "vocad" 
         # speed (whenmod 14 10 ((*1) <$>) "0.5") 
-        # gain "1" 
+        # gain "1.1" 
         # cut "1", 
-    degradeBy 0.3 $ shift $ whenmod 14 10 (# up "-2") $ sound "~ bor" # cut "10"
-        # gain "1" ]
+    move $ degradeBy 0.3 $ shift $ whenmod 14 10 (# up "-2") $ 
+        sound "~ bor" # cut "10"
+        # hpf 100 # resonance 0.1
+        # gain "1",
+    degradeBy 0.5 $ shift $ s "{tite peri stite kit3 ulh untuned}%16" 
+        # n (shift' 101 $ irand 30) # gain 0.9 # rel 0.25,
+    g $ sometimes (0.125 ~>) $ s "~ stite" # speed "0.9",
+    g $ slow 2 $ every 2 (g) $ s "k(3,8)",
+    g $ density 2 $ s "ride" # cut "77" # gain 0.9 ]
+
+a1 silence
 
 a1 $ degradeBy 0.4 $ 
     whenmod 14 10 (|+| note "0") $
     sometimes (off 0.0625 (|+| note 12)) $ 
+    whenmod 10 5 (density 2) $ 
     (|+| note "12") $
     gain "1*8" # note (shift' 401 $ choose mpent) # s "midi" # midichan 15
 

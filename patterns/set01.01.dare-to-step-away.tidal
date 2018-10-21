@@ -11,27 +11,62 @@ let
     dec2 = 66
     rel2 = 67
 
--- wavpad
-bg1 $ (# pan (rand)) $ (# speed "1") $
-    slow 8 $ zoom (0,0.5) $ striate' 128 (1/20) $ s "syn" # gain 1.25 
 
-a1 $ (|+| note "-12") $ (|+| note "-4") $     
+flood "O HAI GITHUB UNIVERSE!! "
+
+
+-- wavpad
+bg1 $ (# pan (rand)) $ (# speed "1") $ 
+    slow 8 $ zoom (0,0.5) $ striate' 128 (1/20) $ s "syn" # gain 1.1 
+
+a1 $ (|+| note "-12") $ (|+| note "-4") $  
     stack [note "{0 ~ ~}%8" ] # s "midi" # midichan 15 # gain 1.15
 
-a2 $ (|+| note "0") $
+a2 $ g $  (|+| note "0") $
     (0.25 <~) $ density 2 $ (|+| note "-12") $
     every 2 (id) $ note "[1,16]" # s "midi" # midichan 14 # gain 1.15
 
+bg1 silence
+
 cc $ stack [ 
-    gain "1*8" # control (scale 34 34 $ slow 8 sine) # ctlNum cut1
-    , gain "1*8" # control (scale 74 74 $ slow 6.331 sine) # ctlNum env1
-    , gain "1*8" # control (scale 0 10 $ slow 7 sine) # ctlNum dec1
-    , gain "1*8" # control (scale 0 14 $ slow 9 sine) # ctlNum rel1
-    , gain "1*8" # control (scale 44 84 $ slow 7.8329 sine) # ctlNum dfb
-    , gain "1*8" # control (scale 34 34 $ slow 8.8329 sine) # ctlNum cut2
-    , gain "1*8" # control (scale 80 80 $ slow 6.8329 sine) # ctlNum env2
-    , gain "1*8" # control (scale 64 64 $ slow 10.8329 sine) # ctlNum dec2
-    , gain "1*8" # control (scale 14 64 $ slow 11.8329 sine) # ctlNum rel1
+    gain "1*8" # control (scale 34 44 $ slow 8 sine) # ctlNum cut1
+    , gain "1*8" # control (scale 64 74 $ slow 6.331 sine) # ctlNum env1
+    , gain "1*8" # control (scale 0 30 $ slow 7 sine) # ctlNum dec1
+    , gain "1*8" # control (scale 0 54 $ slow 9 sine) # ctlNum rel1
+    , gain "1*8" # control (scale 44 94 $ slow 7.8329 sine) # ctlNum dfb
+    , gain "1*8" # control (scale 54 54 $ slow 8.8329 sine) # ctlNum cut2
+    , gain "1*8" # control (scale 60 80 $ slow 6.8329 sine) # ctlNum env2
+    , gain "1*8" # control (scale 64 70 $ slow 10.8329 sine) # ctlNum dec2
+    , gain "1*8" # control (scale 14 94 $ slow 11.8329 sine) # ctlNum rel2
     ] # s "midi" # midichan 15 # midicmd "control"
 
+    a1 silence
+
 -- pson2, bd????, sd, fk
+d1 $ g $ degradeBy 0.5 $ 
+    stack [ 
+        degradeBy 0.3 $ s "pson2*8" # n (shift' 10 $ irand 20) # speed 2,
+        jux (iter 8) $ (0.5 ~>) $ s "~ sd",
+        degradeBy 0.3 $ density 2 $ every 2 g $ within (0.5, 1) g  $ s "bd(3,8)"
+    ]
+
+    hush
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

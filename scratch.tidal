@@ -114,3 +114,6 @@ d1 $ every 4 (rev) $ every 3 (chop 4) $
 
 
 
+bg1 $ s "turret*8" # begin rand # cut 1
+
+hush

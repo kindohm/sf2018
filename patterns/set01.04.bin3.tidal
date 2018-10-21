@@ -12,26 +12,34 @@ let
     dfb = 68
 
 do
-    let pat = (density 2 $ slowcat ["0(3,8)", "~", "0*4?", "1"])
+    let pat = (density 2 $ slowcat ["0(3,16)", "[0*4? 1/2]", "0*8?", "1 0*4?"])
     let prog = "[0 -2]/4"
     -- synths
-    a1 $ (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15 # s "midi"
+    a1 $ (|*| gain 1.1) $ (|+| note prog) $ gain (pat) # note "[0,[4 7]/3,11]" # midichan 15 # s "midi" # sustain 0.1
     a2 $ (|*| gain 1.15) $ (|+| note prog) $ gain (inv <$> pat) # note "0" # midichan 12 # s "midi" # sustain 0.1
     cc $ stack [ 
             gain "1*4" # control (scale 30 30 $ slow 13.1 sine) # ctlNum env1
-            , gain "1*4" # control (scale 0 0 $ slow 11.31 sine) # ctlNum hpf1
-            , gain "1*4" # control (scale 0 40 $ slow 12.25 sine) # ctlNum rel1
-            , gain "1*4" # control (scale 0 10 $ slow 11.1258 sine) # ctlNum det1
-            , gain "1*4" # control (scale 10 10 $ slow 10.212 sine) # ctlNum env2
-            , gain "1*4" # control (scale 0 0 $ slow 8.41 sine) # ctlNum hpf2
-            , gain "1*4" # control (scale 0 10 $ slow 9.587 sine) # ctlNum rel2
-            , gain "1*4" # control (scale 0 10 $ slow 10.518 sine) # ctlNum det2
-            , gain "1*4" # control (scale 0 10 $ slow 7.918 sine) # ctlNum dfb
+            , gain "1*4" # control (scale 0 50 $ slow 11.31 sine) # ctlNum hpf1
+            , gain "1*4" # control (scale 0 50 $ slow 12.25 sine) # ctlNum rel1
+            , gain "1*4" # control (scale 0 20 $ slow 11.1258 sine) # ctlNum det1
+            , gain "1*4" # control (scale 10 20 $ slow 10.212 sine) # ctlNum env2
+            , gain "1*4" # control (scale 0 40 $ slow 8.41 sine) # ctlNum hpf2
+            , gain "1*4" # control (scale 0 60 $ slow 9.587 sine) # ctlNum rel2
+            , gain "1*4" # control (scale 0 20 $ slow 10.518 sine) # ctlNum det2
+            , gain "1*4" # control (scale 0 50 $ slow 7.918 sine) # ctlNum dfb
             ] # s "midi" # midichan 15 # midicmd "control"
-    d1 $ stack [            
+    d1 $ g $ stack [     
+                (0.5 ~>) $ gain (inv <$> pat) # s "ch",       
+                s "~ teks [~ teks] ~" # lpf 2000,
                 gain (inv <$> pat) # s "artk" # rel 0.3,
                 superimpose ((#pan 0) . (|*| speed 0.8)) $ 
                     gain (pat) # s "cp" # speed "0.8" # pan 1 # hpf 1000
         ]
+
+
+flood "hey this software is called TidalCycles. if you're interested. "
+
+
+
 
         hush

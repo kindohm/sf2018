@@ -2,12 +2,14 @@ bps (150/120)
 
 -- grvperc, grvcp, grvch, k:8, grvm!!
 
+d2 silence
+
 do
     let snarecut = 334
     let bpat = gain (density 2 $ every 4 (const $ "~") $ randcat ["1"] )
     d1 $ 
         bpat # s "grvb" # cut snarecut # lpf 200 # gain 1.15
-    d2 $ (|*| gain 1.15) $ stack [ 
+    d2 $ g $ (|*| gain 1.15) $ stack [ 
             bpat # s "grvk" # lpf 2000 # hpf 200,
             (# gain 0) $ slow 2 $ s "grvcp" # cut snarecut # lpf 2000] 
 

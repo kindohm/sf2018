@@ -9,20 +9,25 @@ let
     sli2 = 66
 
 
-a1 $ (|+| note "-24") $ 
+a1 $ (|+| note "-24") $
+    sometimes (stut' (shift' 44 $ choose [1,2,3]) (0.125*3) (|+| note 12)) $
     (|+| note "-4") $ slow 4 $ note "[0 ~ ~ [~ 11/2 ~ ~]]" # s "midi" # midichan 15 # sustain 0.3
 
 a2 $ (0.5 ~>) $ (|+| note 12) $ (|+| note "-4") $ note "0(3,8)" # s "midi" # midichan 14
 
 cc $ stack [ 
-    gain "1*8" # control 74 # ctlNum env1
+    gain "1*8" # control (scale 74 110 $ slow 7 sine) # ctlNum env1
     , gain "1*8" # control 74 # ctlNum len1
-    , gain "1*8" # control 10 # ctlNum dfb
-    , gain "1*8" # control 30 # ctlNum env2
-    , gain "1*8" # control 10 # ctlNum hpf2
+    , gain "1*8" # control (scale 0 60 $ slow 8 sine) # ctlNum dfb
+    , gain "1*8" # control (scale 40 60 $ slow 8.11 sine) # ctlNum env2
+    , gain "1*8" # control (scale 10 100 $ slow 9 sine) # ctlNum hpf2
     , gain "1*8" # control 10 # ctlNum sli2
     ] # s "midi" # midichan 15 # midicmd "control"
 
+cc silence
+
+a2 silence
+a1 silence
 hush
 
 bg1 $ every 2 rev $ 
@@ -37,10 +42,18 @@ bg1 $ every 2 rev $
 d1 $ stack [
     s "{wwt*2 wwt ~ ~ ~}%4" # gain 0.9,
     every 3 (# speed "-1") $ every 5 (chop 16) $ s "~ cpr/4",
-    sometimes (stut' 1 (0.125*3) id) $ 
-    s "{wwk ~ ~}%4" # speed 0.9,
-    g $ jux (iter 8) $ (0.5 ~>) $ s "vbs(3,8)" # speed "[1,-1]" # lpf 2000,
-    sometimes (stut' 1 (0.125) id) $ shift' 2 $ slow 2 $ s "~ wws" ]
+    g $ sometimes (stut' 1 (0.125*3) id) $ 
+        s "{wwk ~ ~}%2" # speed 0.9 # rel 0.1,
+    g $ jux (iter 8) $ (0.5 ~>) $ s "vbs(3,8)" # speed "[1,-1]" 
+        # lpf (scale 1000 1000 $ slow 10 sine) # gain 0.9,
+    jux (iter 8) $ 
+        sometimes (stut' 1 (0.125) id) $ shift' 2 $ slow 2 $ s "~ wws" ]
 
 
 hush
+
+
+
+
+
+

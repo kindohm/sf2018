@@ -11,7 +11,8 @@ let
 hush
 
 do
-    a1 $ 
+    a1 $ rarely (stut' 1 (0.0625*3) (|+| note (shift' 11 $ choose [12]))) $ 
+        (|+| note "0") $
         density 2 $ note "[0,4,9,11]" 
         # s "midi" 
         # midichan 15 
@@ -21,15 +22,30 @@ do
             density 2 $ control "[0 127]/8" # ctlNum chd
             , gain 1 # control (scale 54 54 $ slow 10 sine) # ctlNum cut1
             , gain 1 # control (scale 10 10 $ slow 9 sine) # ctlNum env1
-            , gain 1 # control (scale 0 1 $ slow 8 sine) # ctlNum lfo1
+            , gain 1 # control (scale 0 10 $ slow 8 sine) # ctlNum lfo1
             , gain 1 # control (scale 64 100 $ slow 7 sine) # ctlNum dly1
-            , gain 1 # control (scale 4 10 $ slow 9.314 sine) # ctlNum dfb1
+            , gain 1 # control (scale 20 60 $ slow 6.314 sine) # ctlNum dfb1
              ]
         # s "midi" 
         # midichan 15 
         # midicmd "control"
     -- artk, artcp, arts, artch, artperc
-    d1 $ 
-        stack [ ]
+    d1 $ g $
+        stack [ 
+            g $ density 1 $ s "artk [~ artk] ~ artk?" 
+                # rel 0.2,
+            g $ sometimes (roll) $ 
+                density 2 $ s "~ artcp", 
+            g $ density 2 $ (0.5 ~>) $ s "artch(3,8)",
+            g $ stut' 1 (0.125*3) ((|*| gain 0.95) . (# pan (shift' 44 $ rand)) . (# lpf 4000) ) $ 
+                s "~ arts",
+            g $ degradeBy 0.5 $ shift' 55 $ 
+                s "artperc*16" # n (irand 3) # speed 1 ]
+
+
+
+
+
+
 
 hush

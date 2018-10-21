@@ -9,16 +9,17 @@ let lpf1 = 3
     dfb1 = 68
 
 -- a4 version
-a1 $ sometimesBy 0 (stut' (shift' 20 $ choose [1,2]) (0.125*3) (|+| note (shift' 44 $ choose [5,7,12,14]))) $ (|+| note 0) $ 
+a1 $ sometimesBy 0 (stut' (shift' 20 $ choose [1,2]) (0.125*3) (|+| note (shift' 44 $ choose [5,7,12,14]))) $ 
     (|+| note "-7") $ slow 4 $ note "{[0 4] 2 -24 ~ [ 4 11] ~ ~ [0] [14 16] ~ 11 ~ ~}%16" # s "midi" # midichan 15 # nudge 0.2 # gain 1.15
 
 
+
 cc $ stack [ 
-        gain "1*16" # control (scale 40 40 $ slow 13.1 sine) # ctlNum lpf1
+        gain "1*16" # control (scale 45 50 $ slow 13.1 sine) # ctlNum lpf1
         , gain "1*16" # control (scale 64 64 $ slow 11.31 sine) # ctlNum env1
-        , gain "1*16" # control (scale 64 64 $ slow 12.25 sine) # ctlNum len1
-        , gain "1*16" # control (scale 60 70 $ slow 10.212 sine) # ctlNum noi1
-        , gain "1*16" # control (scale 0 40 $ slow 8.41 sine) # ctlNum det1
+        , gain "1*16" # control (scale 64 84 $ slow 12.25 sine) # ctlNum len1
+        , gain "1*16" # control (scale 60 60 $ slow 10.212 sine) # ctlNum noi1
+        , gain "1*16" # control (scale 0 0 $ slow 8.41 sine) # ctlNum det1
         , gain "1*16" # control (scale 64 64 $ slow 9.587 sine) # ctlNum sli1
         , gain "1*16" # control (scale 64 64 $ slow 14.6801 sine) # ctlNum dfb1
     ] # s "midi" # midichan 15 # midicmd "control"
@@ -29,13 +30,33 @@ d1 $ stack [ s "cantch*16" ]
 
 
 -- just hats n claps
-d1 $ stack [ s "cantch*16", (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ]     
+d1 $ stack [ 
+    s "cantch*8", 
+    (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ]     
 
 
 d1 $ stack [ 
-    whenmod 8 4 (# n 4) $ density 1 $ ((0.125*3) <~) $ s "cantt(3,8)" # cut 8 # rel 1
-    , every 4 (within ((0.375 + 0.0625), 0.5) (# s "cantoh")) $ density 4 $ s "cantch" # cut 1001
-    , (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ] 
+    g $ whenmod 8 4 (# n 4) $ density 1 $ ((0.125*3) <~) $ s "cantk(3,8)" # cut 8 
+        # rel 0.2 # speed 1
+    ,   every 4 (within ((0.375 + 0.0625), 0.5) (# s "cantoh")) $ density 2 $ 
+        s "cantch" # cut 1001
+    ,  g $ (0.125 <~) $ s "cantcp" # nudge (scale 0 0.01 $ shift' 88 rand) ] 
 
+    d1 silence
+
+
+flood "tidalcycles "
 
 hush
+
+
+
+
+
+
+
+
+
+
+
+

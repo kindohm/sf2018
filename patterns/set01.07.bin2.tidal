@@ -14,6 +14,8 @@ let
     rev2 = 67
     dfb = 68
 
+    let pat = "{1 1 1 0 [0] 1 0 1 0 1 ~ ~ ~ ~ 1 1 0  ~ }%8"
+
 do
     let pat = "{1 1 1 0 [0] 1 0 1 0 1 ~ ~ ~ ~ 1 1 0  ~ }%8"
     -- synth
@@ -21,20 +23,21 @@ do
             gain (inv <$> pat) # note "[0,2,5]" # midichan 15,
             gain (pat) # note (shift' 33 $ choose [0,0,0,-12,12]) # midichan 12] # s "midi"
     -- drums
-    d1 $ g $ stack [ 
-            gain pat # s "k" # n 1,
-            (|*| gain 0.9) $ gain (inv <$> pat) # s "cp"
+    d2 $ g $ stack [ 
+            g $ gain "1*2" # s "ch:1",
+            g $ gain pat # s "k" # n 1 # rel 0.5,
+            g $ (|*| gain 0.9) $ gain (inv <$> pat) # s "cp"
         ]
     cc $ stack [
-            gain "1*8" # control (scale 0 5 $ slow 10 tri) # ctlNum env1
-            , gain "1*8" # control (scale 0 50 $ slow 9 tri) # ctlNum rel1
-            , gain "1*8" # control (scale 10 30 $ slow 12 tri) # ctlNum dly1
-            , gain "1*8" # control (scale 10 20 $ slow 13 tri) # ctlNum rev1
-            , gain "1*8" # control (scale 5 10 $ slow 10.832 tri) # ctlNum env2
-            , gain "1*8" # control (scale 0 10 $ slow 8.1 tri) # ctlNum rel2
-            , gain "1*8" # control (scale 10 10 $ slow 16 tri) # ctlNum dly2
-            , gain "1*8" # control (scale 10 10 $ slow 17 tri) # ctlNum rev2
-            , gain "1*8" # control (scale 20 40 $ slow 18 tri) # ctlNum dfb ] 
+            gain "1*8" # control (scale 0 20 $ slow 10 tri) # ctlNum env1
+            , gain "1*8" # control (scale 0 20 $ slow 9 tri) # ctlNum rel1
+            , gain "1*8" # control (scale 10 70 $ slow 12 tri) # ctlNum dly1
+            , gain "1*8" # control (scale 10 70 $ slow 13 tri) # ctlNum rev1
+            , gain "1*8" # control (scale 5 20 $ slow 10.832 tri) # ctlNum env2
+            , gain "1*8" # control (scale 0 40 $ slow 8.1 tri) # ctlNum rel2
+            , gain "1*8" # control (scale 10 70 $ slow 16 tri) # ctlNum dly2
+            , gain "1*8" # control (scale 10 40 $ slow 17 tri) # ctlNum rev2
+            , gain "1*8" # control (scale 20 110 $ slow 18 tri) # ctlNum dfb ] 
                 # s "midi" 
                 # midichan 15 # midicmd "control"
 

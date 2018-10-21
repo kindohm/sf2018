@@ -2,16 +2,29 @@ bps (210/120)
 
 -- k:1, defkit, ss
 
+d2 $ degradeBy 0.7 $ 
+    stack [    
+        s "~ teks [~ teks] ~" # lpf 2000,
+    degradeBy 0.4 $ 
+        slowcat [s "defkit1*8", s "defkit2*8", s "tite*8", s "pson2*8" ] 
+            # n (shift' 44 $ irand 30) # speed 2,
+    (1 ~>) $ every 2 g $ s "k:1(3,8)" # rel 0.2,
+    g $ jux (iter 8) $ 
+        slow 2 $ s "~ ss" # lpf (scale 2000 3000 $ slow 7 sine) ]
+
+
+d2 silence
 -- support #1
 d1 $ stack [
-slow 8 $ sound "defb*4" # n "[0 1 2 2]" # speed "[1 1 1 [1 0.5]/2]",
-slow 16 $ sound "gnarl gnarl:1",
+(|*| gain 0.95) $ 
+    slow 8 $ sound "defb*4" # n "[0 1 2 2]" # speed "[1 1 1 [1 0.5]/2]",
+slow 16 $ sound "gnarl gnarl:1" # gain 1.1,
 slow 2 $ sound "~ ~ defdo defdo:1" ]
 
 -- support #2
 d1 $ stack [
 slow 8 $ sound "defb*4" # n "[3 4 5 5 3 6 5 5]/2",
-slow 16 $ sound "gnarl:2 gnarl:3",
+slow 16 $ sound "gnarl:2 gnarl:3" # gain 1.1,
 slow 2 $ sound "~ ~ defdo defdo:1" ]
 
 

@@ -1,18 +1,21 @@
 bps (200/120)
 
+
 -- bass
-a1 $ whenmod 16 8 (|+| note "-5") $ (|+| note (choose[0,12,0])) $ shift' 81 $
+a1 $ g $  whenmod 16 8 (|+| note "-5") $ (|+| note (choose[0,12,0])) $ shift' 81 $
     degradeBy 0.4 $ shift' 82 $ (|+| note "0") $ (|+| note "9") $  (|+| note (shift' 99 $ choose mpent)) $ note "-24"
         # s "midi" # midichan 15 # sustain 1 # gain 1.1
 
 -- arps
-a2  $ whenmod 16 8 (|+| note "-5") $ (|+| note (shift' 1011 $ choose [-12,0,12])) $ shift' 66 $ 
+a2  $ (|*| gain 1.1) $  
+    whenmod 16 8 (|+| note "-5") $ (|+| note (shift' 1011 $ choose [-12,0,12])) $ shift' 66 $ 
     (|+| note "9") $ 
     (# note (shift' 98 $ choose mpent)) $ gain "{1*4 1*4 ~ ~ ~ ~ ~}%2" # s "midi" # midichan 14
 
 
 -- strings
-a3 $ slow 8 $ whenmod 16 8 (|+| note "-5") $
+a3 $ g $  (|*| gain 1.1) $  
+    slow 8 $ whenmod 16 8 (|+| note "-5") $
     stack [
         (|+| note (shift' 44 $ choose[0,0,-12])) $ shift' 71 $ (|+| note "-12") $ (|+| note "9") $
             (|+| note (shift' 47 $ choose mpent)) $
@@ -22,7 +25,27 @@ a3 $ slow 8 $ whenmod 16 8 (|+| note "-5") $
             note "{0 ~ ~}%8" # sustain (scale 2 3 $ slow 3.3 rand)] # s "midi" # midichan 13
 
 
+            a1 silence
+
 -- k run, zls, ch:9, peri, pson, doru, wet
-d1 $ slow 2 $ stack [ ]
+d1 $ g $ whenmod 10 8 (jux rev) $ 
+    every 4 (rip 0.5 0.1) $ every 5 (rip' 0 1 12 0.25 0.125) $
+    every 6 (# accelerate "-1 1") $
+    slow 2 $ stack [ 
+    g $ (|*| gain 1.05) $ degradeBy 0.5 $ shift' 100 $ s "alonevox*8" 
+        # beginend (discretise (1/4) $ scale 0.05 0.8 $ slow 33 rand) "0.1" # pan (shift' 448 rand),
+    s "k*4 ~ ~ ~" # n (run 10) # rel 0.2,
+    s "~ zls/2",
+    degradeBy 0.5 $ shift' 4 $ 
+        s "{peri pson2 doru pson2 tite}%16" 
+        # n (irand 30)
+    ]
+
+
+
+
+
+
+
 
 hush

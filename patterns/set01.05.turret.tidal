@@ -1,13 +1,27 @@
 -- turret
 bps (185/120)
 
-d1 $ jux (iter 8) $ 
-    s "turret" 
-    # bpf (scale 100 300 $ slow 7 sine) 
-    # orbit 1 
-    # room 0.5
-    # size 0.97
-    # n "[0 1 2]/12"
-    # gain 0.9
+a2 silence
+
+do
+    d1 $ g $ jux (iter 8) $ 
+        s "turret" 
+        # bpf (scale 200 2000 $ slow 7 sine) 
+        # orbit 1 
+        # room 0.5
+        # size 0.97
+        # n "[0 1 2]/12"
+        # gain 1
+    d2 $ every 7 (# accelerate "-1 1") $ 
+        every 4 (rip 0.5 0.1) $ every 5 (rip' 0 1 8 0.25 0.25) $ 
+        stack [
+        every 5 (# speed "-1") $ every 2 (chop "<16 8 32 24>") $ 
+            s "cpr/3",
+        g $ within (0.5, 1) g $ s "k(3,8)",
+        jux (iter 8) $ 
+            thicken' 0.9 0.8 $ slow 2 $ s "cp(3,8)" 
+                # lpf (scale 200 5000 $ slow 5 sine),
+        foldEvery [2,3,4] (density 2) $ s "ch:1*4" 
+            # bpf (scale 500 7000 $ slow 4.5 saw) ]
 
 hush
